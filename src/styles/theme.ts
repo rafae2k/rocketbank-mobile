@@ -50,9 +50,9 @@ export default {
     xxl: 32,
   },
   fontWeight: {
-    light: 400,
-    medium: 500,
-    bold: 700
+    light: '400',
+    medium: '500',
+    bold: '700'
   },
   space: {
     xs: 2,
