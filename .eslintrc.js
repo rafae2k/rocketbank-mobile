@@ -24,6 +24,7 @@ module.exports = {
       '@typescript-eslint/no-empty-function': 'off',
       'react/display-name': 'off',
       'react/prop-types': 'off',
+      '@typescript-eslint/no-var-requires': 'off',
     },
     settings: {
       react: {
