@@ -8,7 +8,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "lint": "eslint",
+    "lint": "eslint src --fix",
     "prepare:husky": "husky install",
     "cz": "czg"
   },
@@ -16,6 +16,7 @@
     "@expo-google-fonts/urbanist": "^0.2.2",
     "@expo/vector-icons": "^13.0.0",
     "@react-navigation/bottom-tabs": "^6.3.2",
+    "@react-navigation/material-top-tabs": "^6.2.2",
     "@react-navigation/native": "^6.0.11",
     "@react-navigation/stack": "^6.2.2",
     "expo": "~45.0.0",
@@ -29,8 +30,10 @@
     "react-hook-form": "^7.33.1",
     "react-native": "0.68.2",
     "react-native-gesture-handler": "~2.2.1",
+    "react-native-pager-view": "5.4.15",
     "react-native-safe-area-context": "4.2.4",
     "react-native-screens": "~3.11.1",
+    "react-native-tab-view": "^3.1.1",
     "react-native-web": "0.17.7",
     "rneui": "^1.0.0-stable.0",
     "styled-components": "^5.3.5"
