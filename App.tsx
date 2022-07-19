@@ -10,6 +10,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import Routes from './src/routes'
 import { useCallback, useEffect, useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
+import { ThemeProvider } from 'styled-components'
+import theme from './src/styles/theme'
 
 void SplashScreen.preventAutoHideAsync()
 
@@ -43,8 +45,10 @@ export default function App() {
   return (
     <NavigationContainer>
       <SafeAreaProvider>
-        <Routes />
-        <StatusBar style="auto" />
+        <ThemeProvider theme={theme}>
+          <Routes />
+          <StatusBar style="auto" />
+        </ThemeProvider>
       </SafeAreaProvider>
     </NavigationContainer>
   )
