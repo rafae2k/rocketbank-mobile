@@ -1,11 +1,15 @@
 import { createStackNavigator } from '@react-navigation/stack'
-import { Account, Home, Portfolio, Stocks } from '../screens'
+import { Home, Portfolio, Stocks } from '../screens'
+import theme from '../styles/theme'
+import TopTab from './TopTab'
 
 export type StacksParamList = {
   Home: undefined
   Portfolio: undefined
   Stocks: undefined
   Account: undefined
+  Deposit: undefined
+  Withdraw: undefined
 }
 
 const Stack = createStackNavigator<StacksParamList>()
@@ -26,10 +30,13 @@ export const AccountStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false
+        headerStyle: {
+          backgroundColor: theme.colors.darkBackground
+        },
+        headerTintColor: theme.colors.neutral.white
       }}
     >
-      <Stack.Screen name="Account" component={Account} />
+      <Stack.Screen name="Account" component={TopTab} />
     </Stack.Navigator>
   )
 }

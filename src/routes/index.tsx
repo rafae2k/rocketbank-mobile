@@ -15,8 +15,8 @@ export default function Routes() {
     <Stack.Navigator
       screenOptions={{ headerShown: false, gestureEnabled: false }}
     >
-      <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="HomeTabs" component={Tabs} />
+      <Stack.Screen name="Login" component={Login} />
     </Stack.Navigator>
   )
 }
