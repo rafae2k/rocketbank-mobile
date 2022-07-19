@@ -1,19 +1,34 @@
-import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { Icon } from '@rneui/themed'
-import theme from '../../styles/theme'
 import { IconProps } from '../../types/IconTypes'
+import * as S from './styles'
 
-type ButtonProps = {
+export type ButtonProps = {
   handleClick?: () => void
   label: string
   icon?: IconProps
+  radius?: 'none' | 'full' | 'half'
+  iconPosition?: 'left' | 'right'
+  type?: 'filled' | 'outlined' | 'text'
+  margin?: 'left' | 'right'
 }
 
-export default function Button({ label, icon, handleClick }: ButtonProps) {
+export default function Button({
+  margin,
+  type = 'filled',
+  radius = 'half',
+  iconPosition,
+  label,
+  icon,
+  handleClick
+}: ButtonProps) {
   return (
-    <TouchableOpacity style={styles.button} onPress={handleClick}>
-      <Text style={styles.buttonText}>{label}</Text>
-      {icon && (
+    <S.Container
+      onPress={handleClick}
+      type={type}
+      radius={radius}
+      margin={margin}
+    >
+      {icon && iconPosition === 'left' && (
         <Icon
           type={icon.type}
           name={icon.iconName}
@@ -21,23 +36,18 @@ export default function Button({ label, icon, handleClick }: ButtonProps) {
           color={icon.color}
         />
       )}
-    </TouchableOpacity>
+
+      <S.Label iconPosition={iconPosition} type={type}>
+        {label}
+      </S.Label>
+      {icon && iconPosition === 'right' && (
+        <Icon
+          type={icon.type}
+          name={icon.iconName}
+          size={icon.size}
+          color={icon.color}
+        />
+      )}
+    </S.Container>
   )
 }
-
-const styles = StyleSheet.create({
-  button: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: theme.space.md,
-    backgroundColor: theme.colors.primary.brand,
-    borderRadius: theme.borderRadius.full
-  },
-  buttonText: {
-    fontSize: theme.fontSize.base,
-    fontFamily: theme.fontFamily,
-    fontWeight: theme.fontWeight.bold,
-    color: theme.colors.neutral.white
-  }
-})
