@@ -14,8 +14,8 @@ import {
   Alert
 } from 'react-native'
 
-import theme from '../styles/theme'
-import { Button, LoginForm } from '../components'
+import theme from '../../styles/theme'
+import { Button, LoginForm } from '../../components'
 
 export default function Login() {
   const [isBiometricSupported, setIsBiometricSupported] = useState(false)
@@ -50,7 +50,7 @@ export default function Login() {
           <View style={styles.container}>
             <Image
               source={
-                require('../../assets/logo-black.png') as ImageSourcePropType
+                require('../../../assets/logo-black.png') as ImageSourcePropType
               }
               style={styles.logo}
               resizeMode="contain"
@@ -62,16 +62,19 @@ export default function Login() {
 
             <LoginForm />
 
-            <Button
-              label={isBiometricSupported ? 'Login with Face ID' : 'Login'}
-              handleClick={handleAuthenticate}
-              icon={{
-                type: 'feather',
-                iconName: 'arrow-right',
-                size: 24,
-                color: theme.colors.neutral.white
-              }}
-            />
+            <View style={{ height: 48 }}>
+              <Button
+                label={isBiometricSupported ? 'Login with Face ID' : 'Login'}
+                handleClick={handleAuthenticate}
+                iconPosition="right"
+                icon={{
+                  type: 'feather',
+                  iconName: 'arrow-right',
+                  size: 24,
+                  color: theme.colors.neutral.white
+                }}
+              />
+            </View>
           </View>
         </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
@@ -81,27 +84,27 @@ export default function Login() {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: theme.space.md,
+    paddingHorizontal: 16,
     height: '100%',
     justifyContent: 'center'
   },
   logo: {
     width: 100,
     height: 100,
-    marginBottom: theme.space.md
+    marginBottom: 16
   },
   header: {
     fontFamily: theme.fontFamily,
-    fontSize: theme.fontSize.xxl,
+    fontSize: 32,
     fontWeight: theme.fontWeight.light,
     width: 180,
-    marginBottom: theme.space.sm
+    marginBottom: 4
   },
   subTitle: {
     fontFamily: theme.fontFamily,
-    fontSize: theme.fontSize.base,
+    fontSize: 16,
     fontWeight: theme.fontWeight.medium,
     color: theme.colors.text.onDarkSubHeading,
-    marginBottom: theme.space.xl
+    marginBottom: 32
   }
 })
