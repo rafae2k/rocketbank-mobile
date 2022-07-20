@@ -94,16 +94,14 @@ const styles = StyleSheet.create({
     marginBottom: 16
   },
   header: {
-    fontFamily: theme.fontFamily,
+    fontFamily: theme.fontWeight.light,
     fontSize: 32,
-    fontWeight: theme.fontWeight.light,
     width: 180,
     marginBottom: 4
   },
   subTitle: {
-    fontFamily: theme.fontFamily,
+    fontFamily: theme.fontWeight.medium,
     fontSize: 16,
-    fontWeight: theme.fontWeight.medium,
     color: theme.colors.text.onDarkSubHeading,
     marginBottom: 32
   }

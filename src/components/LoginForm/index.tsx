@@ -1,5 +1,4 @@
 import { StyleSheet, View } from 'react-native'
-import theme from '../../styles/theme'
 import Input from '../Input'
 
 export default function LoginForm() {
@@ -13,6 +12,6 @@ export default function LoginForm() {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: theme.space.xl
+    marginBottom: 32
   }
 })
