@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native'
+import * as Font from 'expo-font'
 import {
-  useFonts,
   Urbanist_400Regular,
   Urbanist_500Medium,
   Urbanist_700Bold
@@ -16,35 +16,38 @@ import theme from './src/styles/theme'
 void SplashScreen.preventAutoHideAsync()
 
 export default function App() {
-  const [isReady, setIsReady] = useState(false)
-  const [fontsLoaded] = useFonts({
-    Urbanist_500Medium,
-    Urbanist_400Regular,
-    Urbanist_700Bold
-  })
-
-  const onFinish = useCallback(async () => {
-    await SplashScreen.preventAutoHideAsync()
-    setIsReady(true)
-  }, [])
+  const [appIsReady, setAppIsReady] = useState(false)
 
   useEffect(() => {
-    void onFinish()
-  }, [onFinish])
-
-  const handleLoading = useCallback(async () => {
-    await SplashScreen.hideAsync()
+    void (async () => {
+      try {
+        await SplashScreen.preventAutoHideAsync()
+        await Font.loadAsync({
+          Urbanist_400Regular,
+          Urbanist_500Medium,
+          Urbanist_700Bold
+        })
+      } catch {
+        console.error('Error loading fonts')
+      } finally {
+        setAppIsReady(true)
+      }
+    })()
   }, [])
 
-  useEffect(() => {
-    if (fontsLoaded && isReady) void handleLoading()
-  }, [fontsLoaded, handleLoading, isReady])
+  const onLayout = useCallback(() => {
+    if (appIsReady) {
+      void SplashScreen.hideAsync()
+    }
+  }, [appIsReady])
 
-  if (!isReady) return null
+  if (!appIsReady) {
+    return null
+  }
 
   return (
     <NavigationContainer>
-      <SafeAreaProvider>
+      <SafeAreaProvider onLayout={onLayout}>
         <ThemeProvider theme={theme}>
           <Routes />
           <StatusBar style="auto" />
