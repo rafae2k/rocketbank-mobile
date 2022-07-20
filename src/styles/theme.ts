@@ -39,7 +39,6 @@ export default {
       grayLight: '#E1E1E1'
     }
   },
-  fontFamily: 'Urbanist',
   fontSize: {
     xs: '12px',
     sm: '14px',
@@ -50,9 +49,9 @@ export default {
     xxl: '32px'
   },
   fontWeight: {
-    light: '400',
-    medium: '500',
-    bold: '700'
+    light: 'Urbanist_400Regular',
+    medium: 'Urbanist_500Medium',
+    bold: 'Urbanist_700Bold'
   },
   space: {
     xs: '2px',
