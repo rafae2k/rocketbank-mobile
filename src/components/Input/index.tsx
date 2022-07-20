@@ -81,10 +81,10 @@ export default function Input({
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 8,
     backgroundColor: theme.colors.neutral.grayLight,
     paddingHorizontal: 16,
     borderRadius: 4,
