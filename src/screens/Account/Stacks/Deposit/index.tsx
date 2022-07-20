@@ -7,7 +7,7 @@ import * as S from './styles'
 //   children: ReactNode
 // }
 
-export function Deposit() {
+export default function Deposit() {
   return (
     <S.Container>
       <S.InfoWrapper>

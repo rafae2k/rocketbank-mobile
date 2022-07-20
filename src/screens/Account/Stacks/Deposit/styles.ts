@@ -30,15 +30,14 @@ export const InfoWrapper = styled.View`
 
 export const TextRight = styled.Text`
   ${({ theme }) => css`
-    font-family: ${theme.fontFamily};
+    font-family: ${theme.fontWeight.medium};
     font-size: ${theme.fontSize.base};
   `}
 `
 
 export const TextLeft = styled.Text`
   ${({ theme }) => css`
-    font-family: ${theme.fontFamily};
+    font-family: ${theme.fontWeight.bold};
     font-size: ${theme.fontSize.md};
-    font-weight: ${theme.fontWeight.bold};
   `}
 `
