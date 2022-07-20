@@ -1,4 +1,11 @@
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  ImageSourcePropType
+} from 'react-native'
 import { Icon } from '@rneui/themed'
 import { useNavigation } from '@react-navigation/native'
 import theme from '../../styles/theme'
@@ -15,7 +22,10 @@ export default function HomeHeader() {
           <Text style={styles.subTitle}>Onde vamos investir hoje?</Text>
         </View>
 
-        <View style={styles.profile} />
+        <Image
+          source={require('../../../assets/avatar.png') as ImageSourcePropType}
+          style={styles.profile}
+        />
       </View>
 
       <View style={styles.moneyContainer}>
