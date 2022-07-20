@@ -1,56 +1,58 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { useFonts, Urbanist_400Regular, Urbanist_500Medium, Urbanist_700Bold } from '@expo-google-fonts/urbanist';
-import * as SplashScreen from 'expo-splash-screen';
-import { StyleSheet } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import Routes from './src/routes';
-import { useCallback, useEffect, useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native'
+import * as Font from 'expo-font'
+import {
+  Urbanist_400Regular,
+  Urbanist_500Medium,
+  Urbanist_700Bold
+} from '@expo-google-fonts/urbanist'
+import * as SplashScreen from 'expo-splash-screen'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import Routes from './src/routes'
+import { useCallback, useEffect, useState } from 'react'
+import { StatusBar } from 'expo-status-bar'
+import { ThemeProvider } from 'styled-components'
+import theme from './src/styles/theme'
 
-void SplashScreen.preventAutoHideAsync();
+void SplashScreen.preventAutoHideAsync()
 
 export default function App() {
-
-  const [isReady, setIsReady] = useState(false)
-  const [fontsLoaded] = useFonts({
-    Urbanist_500Medium,
-    Urbanist_400Regular,
-    Urbanist_700Bold,
-  });
-
-  const onFinish = useCallback( async () => {
-    await SplashScreen.preventAutoHideAsync();
-    setIsReady(true);
-  }, []);
+  const [appIsReady, setAppIsReady] = useState(false)
 
   useEffect(() => {
-    void onFinish()
-  }, [onFinish]);
+    void (async () => {
+      try {
+        await SplashScreen.preventAutoHideAsync()
+        await Font.loadAsync({
+          Urbanist_400Regular,
+          Urbanist_500Medium,
+          Urbanist_700Bold
+        })
+      } catch {
+        console.error('Error loading fonts')
+      } finally {
+        setAppIsReady(true)
+      }
+    })()
+  }, [])
 
-  const handleLoading = useCallback(async () => {
-    await SplashScreen.hideAsync();
-  }, []);
+  const onLayout = useCallback(() => {
+    if (appIsReady) {
+      void SplashScreen.hideAsync()
+    }
+  }, [appIsReady])
 
-  useEffect(() => {
-    if (fontsLoaded && isReady) void handleLoading();
-  }, [fontsLoaded, handleLoading, isReady])
-  
-  if (!isReady) return null;
-
+  if (!appIsReady) {
+    return null
+  }
 
   return (
     <NavigationContainer>
-      <SafeAreaProvider>
-        <Routes />
+      <SafeAreaProvider onLayout={onLayout}>
+        <ThemeProvider theme={theme}>
+          <Routes />
+          <StatusBar style="auto" />
+        </ThemeProvider>
       </SafeAreaProvider>
     </NavigationContainer>
-  );
+  )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

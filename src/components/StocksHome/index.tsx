@@ -1,36 +1,25 @@
-import { View, StyleSheet, FlatList } from 'react-native';
-import { StockCard } from '../StockCard';
-import { SectionHeader } from '../SectionHeader';
-import theme from '../../styles/theme'
+import { View, StyleSheet, FlatList } from 'react-native'
+import StockCard from '../StockCard'
 
-
-export function StocksHome() {
+export default function StocksHome() {
   return (
-    <View style={ styles.container }>
-      <SectionHeader title='Ações' icon={{
-        handleClick: () => {},
-        type: 'feather',
-        color: theme.colors.neutral.black,
-        size: 24,
-        iconName: 'chevron-right'
-      }}/>
-      <FlatList 
-        data={[1,2,3,4,5,6,7,8,9,10]}
+    <View style={styles.container}>
+      <FlatList
+        data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
         horizontal
         showsHorizontalScrollIndicator={false}
-        style={ styles.list }
+        style={styles.list}
         renderItem={() => <StockCard />}
       />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 16,
     overflow: 'visible'
   },
   list: {
-    overflow: 'visible',
+    overflow: 'visible'
   }
-});
+})

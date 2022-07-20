@@ -5,7 +5,7 @@ export default {
     text: {
       onBackground: '#1C1D23',
       onDarkSubHeading: '#A4A5A7',
-      onDarkBody: '#666666',
+      onDarkBody: '#666666'
     },
     primary: {
       brand: '#549B3B',
@@ -36,40 +36,39 @@ export default {
       white: '#FFFFFF',
       black: '#000000',
       gray: '#A4A5A7',
-      grayLight: '#E1E1E1',
+      grayLight: '#E1E1E1'
     }
   },
-  fontFamily: 'Urbanist',
   fontSize: {
-    xs: 12,
-    sm: 14,
-    base: 16,
-    md: 18,
-    lg: 20,
-    xl: 24,
-    xxl: 32,
+    xs: '12px',
+    sm: '14px',
+    base: '16px',
+    md: '18px',
+    lg: '20px',
+    xl: '24px',
+    xxl: '32px'
   },
   fontWeight: {
-    light: 400,
-    medium: 500,
-    bold: 700
+    light: 'Urbanist_400Regular',
+    medium: 'Urbanist_500Medium',
+    bold: 'Urbanist_700Bold'
   },
   space: {
-    xs: 2,
-    sm: 4,
-    base: 8,
-    md: 16,
-    lg: 24,
-    xl: 32,
-    xxl: 48,
+    xs: '2px',
+    sm: '4px',
+    base: '8px',
+    md: '16px',
+    lg: '24px',
+    xl: '32px',
+    xxl: '48px'
   },
   borderRadius: {
-    sm: 4,
-    base: 8,
-    md: 16,
-    lg: 24,
-    xl: 32,
-    full: 9999
+    sm: '4px',
+    base: '8px',
+    md: '16px',
+    lg: '24px',
+    xl: '32px',
+    full: '9999px'
   },
   shadow: {
     sm: 'box-shadow: 0px 0.973384px 1.94677px rgba(0, 0, 0, 0.2);'
@@ -86,4 +85,3 @@ export default {
     fast: '0.1s ease-in-out'
   }
 } as const
-
