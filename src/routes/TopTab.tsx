@@ -1,6 +1,5 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import { Deposit } from '../screens/Account/Stacks/Deposit'
-import { Withdraw } from '../screens/Account/Stacks/Withdraw'
+import { Deposit, Withdraw } from '../screens'
 import theme from '../styles/theme'
 
 const Tab = createMaterialTopTabNavigator()
@@ -12,19 +11,26 @@ export default function TopTab() {
         tabBarStyle: {
           backgroundColor: theme.colors.darkBackground
         },
-        tabBarLabelStyle: {
-          color: theme.colors.neutral.white,
-          fontFamily: theme.fontFamily,
-          fontWeight: theme.fontWeight.medium
-        },
         tabBarIndicatorStyle: {
           backgroundColor: theme.colors.primary.brand,
           height: 6
+        },
+        tabBarLabelStyle: {
+          fontFamily: theme.fontWeight.bold,
+          color: theme.colors.neutral.white,
+          fontSize: 18,
+          textTransform: 'capitalize'
         }
       }}
     >
-      <Tab.Screen name="Deposit" component={Deposit} />
-      <Tab.Screen name="WithDraw" component={Withdraw} />
+      <Tab.Screen
+        name="Deposit"
+        component={Deposit}
+        options={{
+          tabBarLabel: 'Depositar'
+        }}
+      />
+      <Tab.Screen name="Withdraw" component={Withdraw} />
     </Tab.Navigator>
   )
 }
