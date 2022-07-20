@@ -1,17 +1,21 @@
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
-import { Icon } from '@rneui/themed';
+import { Icon } from '@rneui/themed'
+import { useNavigation } from '@react-navigation/native'
+import theme from '../../styles/theme'
+import Button from '../Button'
 
-export function HomeHeader() {
+export default function HomeHeader() {
+  const navigation = useNavigation()
+
   return (
     <View style={styles.container}>
-
       <View style={styles.topContainer}>
         <View style={styles.headerContainer}>
           <Text style={styles.header}>Olá, Rafo!</Text>
           <Text style={styles.subTitle}>Onde vamos investir hoje?</Text>
         </View>
 
-        <View style={styles.profile}/>
+        <View style={styles.profile} />
       </View>
 
       <View style={styles.moneyContainer}>
@@ -27,22 +31,33 @@ export function HomeHeader() {
           <Icon type="feather" name="trending-up" size={20} color="#549B3B" />
           <Text style={styles.performanceBadgeText}>+10%</Text>
         </View>
-      
       </View>
 
       <View style={styles.bottomContainer}>
-        <TouchableOpacity style={styles.deposit}>
-          <Icon type="feather" name="plus" size={20} color="#549B3B" />
-          <Text style={styles.depositText}>Depositar</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.withdraw}>
-          <Text style={styles.withdrawText}>Sacar</Text>
-        </TouchableOpacity>
+        <Button
+          // @ts-ignore
+          handleClick={() => navigation.navigate('Deposit')}
+          margin="right"
+          label="Depositar"
+          iconPosition="left"
+          icon={{
+            type: 'feather',
+            iconName: 'plus',
+            size: 20,
+            color: '#fff'
+          }}
+        />
+        <Button
+          // @ts-ignore
+          handleClick={() => navigation.navigate('Withdraw')}
+          label="Saque"
+          type="outlined"
+        />
       </View>
-      
 
+      <View style={styles.tabPush} />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -53,64 +68,65 @@ const styles = StyleSheet.create({
     borderBottomEndRadius: 24,
     borderBottomStartRadius: 24,
     paddingHorizontal: 16,
-    paddingVertical: 32,
-    marginBottom: 30,
+    paddingTop: 50,
+    alignItems: 'center',
+    zIndex: 100
   },
   topContainer: {
-    display: 'flex',
+    width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 30,
+    marginBottom: 30
   },
   headerContainer: {
-    display: 'flex',
+    display: 'flex'
   },
   header: {
     color: '#fff',
     fontSize: 20,
-    fontFamily: 'Urbanist_400Regular',
-    marginBottom: 8,
+    fontFamily: 'Urbanist_700Bold',
+    marginBottom: 4
   },
   subTitle: {
     color: '#fff',
     opacity: 0.6,
     fontSize: 14,
-    fontFamily: 'Urbanist_400Regular',
+    fontFamily: 'Urbanist_400Regular'
   },
   profile: {
     width: 48,
     height: 48,
     borderRadius: 9999,
-    backgroundColor: '#D9D9D9',
+    backgroundColor: '#D9D9D9'
   },
   moneyContainer: {
-    display: 'flex',
+    width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingBottom: 30,
+    paddingBottom: 30
   },
   moneyContainerLeft: {
-    display: 'flex',
+    display: 'flex'
   },
   moneyTitle: {
     color: '#fff',
     fontSize: 16,
     fontFamily: 'Urbanist_400Regular',
     opacity: 0.6,
-    marginBottom: 8,
+    marginBottom: 8
   },
   moneyAmount: {
     color: '#fff',
     fontSize: 24,
     fontFamily: 'Urbanist_700Bold',
-    marginRight: 12,
+    marginRight: 12
   },
   moneyButton: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   performanceBadge: {
     display: 'flex',
@@ -121,41 +137,37 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     paddingHorizontal: 8,
     borderRadius: 8,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)'
   },
   performanceBadgeText: {
     color: '#549B3B',
     fontSize: 14,
     fontFamily: 'Urbanist_700Bold',
-    marginLeft: 4,
+    marginLeft: 4
   },
   bottomContainer: {
-    flex: 1,
-    display: 'flex',
-    width: '100%',
     flexDirection: 'row',
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'space-between',
+    marginBottom: 16
   },
   deposit: {
-    display: 'flex',
     flexDirection: 'row',
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 8,
     backgroundColor: '#fff',
     paddingVertical: 8,
-    marginRight: 36
+    marginRight: 16
   },
   depositText: {
     color: '#549B3B',
     fontSize: 16,
     fontFamily: 'Urbanist_700Bold',
-    marginLeft: 8,
+    marginLeft: 8
   },
   withdraw: {
-    display: 'flex',
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
@@ -164,15 +176,19 @@ const styles = StyleSheet.create({
     borderColor: '#549B3B',
     borderWidth: 1,
     borderRadius: 8,
-    paddingVertical: 8,
+    paddingVertical: 8
   },
   withdrawText: {
     color: '#549B3B',
     fontSize: 16,
     fontFamily: 'Urbanist_700Bold',
-    marginLeft: 8,
+    marginLeft: 8
+  },
+  tabPush: {
+    width: 30,
+    height: 4,
+    backgroundColor: theme.colors.neutral.grayLight,
+    borderRadius: 999,
+    marginBottom: 4
   }
-
-
-
-});
+})
