@@ -15,6 +15,7 @@
   "dependencies": {
     "@expo-google-fonts/urbanist": "^0.2.2",
     "@expo/vector-icons": "^13.0.0",
+    "@rainbow-me/animated-charts": "^1.0.0-alpha.6",
     "@react-native-picker/picker": "2.4.0",
     "@react-navigation/bottom-tabs": "^6.3.2",
     "@react-navigation/material-top-tabs": "^6.2.2",
