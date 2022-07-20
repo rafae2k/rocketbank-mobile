@@ -60,8 +60,7 @@ export const Container = styled.TouchableOpacity<
 export const Label = styled.Text<Pick<ButtonProps, 'iconPosition' | 'type'>>`
   ${({ theme, iconPosition, type }) => css`
     font-size: ${theme.fontSize.base};
-    font-family: ${theme.fontFamily};
-    font-weight: ${theme.fontWeight.bold};
+    font-family: ${theme.fontWeight.bold};
 
     ${iconPosition === 'left' && buttonModifiers.left(theme)}
     ${iconPosition === 'right' && buttonModifiers.right(theme)}
