@@ -12,6 +12,17 @@ export type StacksParamList = {
   Withdraw: undefined
 }
 
+const headerOptionsDark = {
+  headerStyle: {
+    backgroundColor: theme.colors.darkBackground
+  },
+  headerTintColor: theme.colors.neutral.white,
+  headerTitleStyle: {
+    fontFamily: theme.fontWeight.bold,
+    fontSize: 20
+  }
+}
+
 const Stack = createStackNavigator<StacksParamList>()
 
 export const HomeStack = () => {
@@ -28,14 +39,7 @@ export const HomeStack = () => {
 
 export const AccountStack = () => {
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: theme.colors.darkBackground
-        },
-        headerTintColor: theme.colors.neutral.white
-      }}
-    >
+    <Stack.Navigator screenOptions={headerOptionsDark}>
       <Stack.Screen name="Account" component={TopTab} />
     </Stack.Navigator>
   )
@@ -43,7 +47,7 @@ export const AccountStack = () => {
 
 export const PortfolioStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={headerOptionsDark}>
       <Stack.Screen name="Portfolio" component={Portfolio} />
     </Stack.Navigator>
   )
@@ -51,7 +55,7 @@ export const PortfolioStack = () => {
 
 export const StocksStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={headerOptionsDark}>
       <Stack.Screen name="Stocks" component={Stocks} />
     </Stack.Navigator>
   )
