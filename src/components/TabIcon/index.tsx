@@ -43,9 +43,10 @@ const styles = StyleSheet.create({
   dot: {
     top: 0,
     left: 0,
-    width: 8,
-    height: 6,
-    borderRadius: 999,
+    width: 6,
+    height: 4,
+    borderBottomLeftRadius: 999,
+    borderBottomRightRadius: 999,
     marginBottom: 4
   },
   icon: {
