@@ -3,12 +3,12 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { Login } from '../screens'
 import Tabs, { BottomTabsParamList } from './Tabs'
 
-export type RoutesStackParamList = {
+export type RootRoutesStackParamList = {
   Login: undefined
   HomeTabs: NavigatorScreenParams<BottomTabsParamList>
 }
 
-const Stack = createStackNavigator<RoutesStackParamList>()
+const Stack = createStackNavigator<RootRoutesStackParamList>()
 
 export default function Routes() {
   return (
