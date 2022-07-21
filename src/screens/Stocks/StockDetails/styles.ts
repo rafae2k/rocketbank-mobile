@@ -10,7 +10,7 @@ export const Container = styled.View`
   `}
 `
 
-export const PaddingWrapper = styled.View`
+export const Content = styled.View`
   ${({ theme }) => css`
     padding: ${theme.space.md} ${theme.space.md} 0;
     overflow: visible;
@@ -71,5 +71,14 @@ export const StockPrice = styled.Text`
     font-size: ${theme.fontSize.xxl};
     color: ${theme.colors.neutral.white};
     font-family: ${theme.fontWeight.bold};
+  `}
+`
+
+export const ButtonsWrapper = styled.View`
+  ${({ theme }) => css`
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: ${theme.space.md} ${theme.space.md} 0;
   `}
 `

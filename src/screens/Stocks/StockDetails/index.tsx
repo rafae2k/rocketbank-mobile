@@ -1,12 +1,15 @@
+import { useNavigation } from '@react-navigation/native'
 import { ImageSourcePropType } from 'react-native'
-import { Chart } from '../../../components'
+import { Button, Chart } from '../../../components'
 
 import * as S from './styles'
 
 export default function StockDetails() {
+  const navigation = useNavigation()
+
   return (
     <S.Container>
-      <S.PaddingWrapper>
+      <S.Content>
         <S.StockHeader>
           <S.StockHeaderRight>
             <S.StockImage
@@ -25,8 +28,32 @@ export default function StockDetails() {
             <S.StockPrice>R$ 1.232,00</S.StockPrice>
           </S.StockPriceWrapper>
         </S.StockHeader>
-      </S.PaddingWrapper>
+      </S.Content>
       <Chart />
+      <S.ButtonsWrapper>
+        <Button
+          label="Comprar"
+          margin="right"
+          handleClick={() =>
+            // @ts-ignore
+            navigation.navigate('BuyOrSell', {
+              stockId: 'AAPL',
+              screen: 'BUY'
+            })
+          }
+        />
+        <Button
+          label="Vender"
+          operation="buy"
+          handleClick={() =>
+            // @ts-ignore
+            navigation.navigate('BuyOrSell', {
+              stockId: 'AAPL',
+              screen: 'SELL'
+            })
+          }
+        />
+      </S.ButtonsWrapper>
     </S.Container>
   )
 }
