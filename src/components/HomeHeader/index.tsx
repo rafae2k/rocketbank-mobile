@@ -45,8 +45,10 @@ export default function HomeHeader() {
 
       <View style={styles.bottomContainer}>
         <Button
-          // @ts-ignore
-          handleClick={() => navigation.navigate('Deposit')}
+          handleClick={() =>
+            // @ts-ignore
+            navigation.navigate('AccountTopTab', { screen: 'Deposit' })
+          }
           margin="right"
           label="Depositar"
           iconPosition="left"
@@ -58,8 +60,10 @@ export default function HomeHeader() {
           }}
         />
         <Button
-          // @ts-ignore
-          handleClick={() => navigation.navigate('Withdraw')}
+          handleClick={() =>
+            // @ts-ignore
+            navigation.navigate('AccountTopTab', { screen: 'Withdraw' })
+          }
           label="Saque"
           type="outlined"
         />

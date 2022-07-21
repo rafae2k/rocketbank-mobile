@@ -1,42 +1,65 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import { Deposit, Withdraw } from '../screens'
+import { Deposit, Withdraw, Buy, Sell } from '../screens'
 import theme from '../styles/theme'
 
-const Tab = createMaterialTopTabNavigator()
+const headerOptionsDark = {
+  tabBarStyle: {
+    backgroundColor: theme.colors.darkBackground
+  },
+  tabBarIndicatorStyle: {
+    backgroundColor: theme.colors.primary.brand,
+    height: 6
+  },
+  tabBarLabelStyle: {
+    fontFamily: theme.fontWeight.bold,
+    color: theme.colors.neutral.white,
+    fontSize: 18,
+    textTransform: 'capitalize'
+  }
+}
 
-export default function TopTab() {
+const TopTab = createMaterialTopTabNavigator()
+
+export function Account() {
   return (
-    <Tab.Navigator
-      screenOptions={{
-        tabBarStyle: {
-          backgroundColor: theme.colors.darkBackground
-        },
-        tabBarIndicatorStyle: {
-          backgroundColor: theme.colors.primary.brand,
-          height: 6
-        },
-        tabBarLabelStyle: {
-          fontFamily: theme.fontWeight.bold,
-          color: theme.colors.neutral.white,
-          fontSize: 18,
-          textTransform: 'capitalize'
-        }
-      }}
-    >
-      <Tab.Screen
+    // @ts-ignore
+    <TopTab.Navigator screenOptions={headerOptionsDark}>
+      <TopTab.Screen
         name="Deposit"
         component={Deposit}
         options={{
           tabBarLabel: 'Depositar'
         }}
       />
-      <Tab.Screen
+      <TopTab.Screen
         name="Withdraw"
         component={Withdraw}
         options={{
           tabBarLabel: 'Sacar'
         }}
       />
-    </Tab.Navigator>
+    </TopTab.Navigator>
+  )
+}
+
+export function BuyOrSell() {
+  return (
+    // @ts-ignore
+    <TopTab.Navigator screenOptions={headerOptionsDark}>
+      <TopTab.Screen
+        name="BUY"
+        component={Buy}
+        options={{
+          tabBarLabel: 'Comprar'
+        }}
+      />
+      <TopTab.Screen
+        name="SELL"
+        component={Sell}
+        options={{
+          tabBarLabel: 'Vender'
+        }}
+      />
+    </TopTab.Navigator>
   )
 }

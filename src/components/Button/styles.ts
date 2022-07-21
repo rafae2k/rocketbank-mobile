@@ -29,13 +29,16 @@ const buttonModifiers = {
   `,
   halfRadius: (theme: DefaultTheme) => css`
     border-radius: ${theme.borderRadius.base};
+  `,
+  buy: (theme: DefaultTheme) => css`
+    background-color: ${theme.colors.semantic.down};
   `
 }
 
 export const Container = styled.TouchableOpacity<
   Omit<ButtonProps, 'label' | 'handleClick' | 'icon'>
 >`
-  ${({ theme, type, radius, margin }) => css`
+  ${({ theme, type, radius, margin, operation }) => css`
     flex-direction: row;
     height: ${theme.space.xxl};
     flex: 1;
@@ -54,11 +57,15 @@ export const Container = styled.TouchableOpacity<
 
     ${margin === 'left' && buttonModifiers.left(theme)}
     ${margin === 'right' && buttonModifiers.right(theme)}
+
+    ${operation === 'buy' && buttonModifiers.buy(theme)}
   `}
 `
 
-export const Label = styled.Text<Pick<ButtonProps, 'iconPosition' | 'type'>>`
-  ${({ theme, iconPosition, type }) => css`
+export const Label = styled.Text<
+  Pick<ButtonProps, 'iconPosition' | 'type' | 'operation'>
+>`
+  ${({ theme, iconPosition, type, operation }) => css`
     font-size: ${theme.fontSize.base};
     font-family: ${theme.fontWeight.bold};
 
@@ -67,5 +74,7 @@ export const Label = styled.Text<Pick<ButtonProps, 'iconPosition' | 'type'>>`
 
     ${type === 'filled' && buttonModifiers.filled(theme)}
     ${type === 'outlined' && buttonModifiers.outlinedLabel(theme)}
+
+    ${operation === 'buy' && buttonModifiers.buy(theme)}
   `}
 `

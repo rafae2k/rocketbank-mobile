@@ -11,7 +11,7 @@ import * as S from './styles'
 import { useMemo } from 'react'
 import theme from '../../styles/theme'
 
-type Item = {
+export type Item = {
   key: string
   render: () => JSX.Element
   isHeader?: boolean
