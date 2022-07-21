@@ -10,9 +10,11 @@ export type ButtonProps = {
   iconPosition?: 'left' | 'right'
   type?: 'filled' | 'outlined' | 'text'
   margin?: 'left' | 'right'
+  operation?: 'buy' | 'sell'
 }
 
 export default function Button({
+  operation,
   margin,
   type = 'filled',
   radius = 'half',
@@ -27,6 +29,7 @@ export default function Button({
       type={type}
       radius={radius}
       margin={margin}
+      operation={operation}
     >
       {icon && iconPosition === 'left' && (
         <Icon
@@ -37,7 +40,7 @@ export default function Button({
         />
       )}
 
-      <S.Label iconPosition={iconPosition} type={type}>
+      <S.Label iconPosition={iconPosition} type={type} operation={operation}>
         {label}
       </S.Label>
       {icon && iconPosition === 'right' && (
