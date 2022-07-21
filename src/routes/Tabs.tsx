@@ -36,7 +36,7 @@ const Tabs = () => {
         component={HomeStack}
         options={{
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon="home" label="Home" />
+            <TabIcon focused={focused} icon="home" label="Início" />
           )
         }}
       />
@@ -45,7 +45,7 @@ const Tabs = () => {
         component={PortfolioStack}
         options={{
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon="bar-chart" label="Portfolio" />
+            <TabIcon focused={focused} icon="pie-chart" label="Portfolio" />
           )
         }}
       />
@@ -54,7 +54,7 @@ const Tabs = () => {
         component={StocksStack}
         options={{
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon="trending-up" label="Market" />
+            <TabIcon focused={focused} icon="trending-up" label="Mercado" />
           )
         }}
       />
@@ -63,7 +63,7 @@ const Tabs = () => {
         component={AccountStack}
         options={{
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon="dollar-sign" label="Account" />
+            <TabIcon focused={focused} icon="dollar-sign" label="Conta" />
           )
         }}
       />
@@ -75,8 +75,6 @@ const styles = StyleSheet.create({
   tabBar: {
     height: 80,
     backgroundColor: theme.colors.darkBackground,
-    borderTopRightRadius: 24,
-    borderTopLeftRadius: 24,
     marginTop: 2,
     position: 'relative',
     overflow: 'hidden'

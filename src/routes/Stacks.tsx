@@ -1,5 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack'
-import { Home, Portfolio, Stocks } from '../screens'
+import { Home, Portfolio, StockDetails, Stocks } from '../screens'
 import theme from '../styles/theme'
 import TopTab from './TopTab'
 
@@ -10,6 +10,9 @@ export type StacksParamList = {
   Account: undefined
   Deposit: undefined
   Withdraw: undefined
+  StockDetails: {
+    stockId: string
+  }
 }
 
 const headerOptionsDark = {
@@ -40,7 +43,13 @@ export const HomeStack = () => {
 export const AccountStack = () => {
   return (
     <Stack.Navigator screenOptions={headerOptionsDark}>
-      <Stack.Screen name="Account" component={TopTab} />
+      <Stack.Screen
+        name="Account"
+        component={TopTab}
+        options={{
+          headerTitle: 'Conta'
+        }}
+      />
     </Stack.Navigator>
   )
 }
@@ -48,7 +57,13 @@ export const AccountStack = () => {
 export const PortfolioStack = () => {
   return (
     <Stack.Navigator screenOptions={headerOptionsDark}>
-      <Stack.Screen name="Portfolio" component={Portfolio} />
+      <Stack.Screen
+        name="Portfolio"
+        component={Portfolio}
+        options={{
+          headerTitle: 'Portfolio'
+        }}
+      />
     </Stack.Navigator>
   )
 }
@@ -56,7 +71,18 @@ export const PortfolioStack = () => {
 export const StocksStack = () => {
   return (
     <Stack.Navigator screenOptions={headerOptionsDark}>
-      <Stack.Screen name="Stocks" component={Stocks} />
+      <Stack.Screen
+        name="Stocks"
+        component={Stocks}
+        options={{
+          headerTitle: 'Mercado'
+        }}
+      />
+      <Stack.Screen
+        name="StockDetails"
+        component={StockDetails}
+        options={({ route }) => ({ title: route.params.stockId })}
+      />
     </Stack.Navigator>
   )
 }

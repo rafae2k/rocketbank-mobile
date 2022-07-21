@@ -30,7 +30,13 @@ export default function TopTab() {
           tabBarLabel: 'Depositar'
         }}
       />
-      <Tab.Screen name="Withdraw" component={Withdraw} />
+      <Tab.Screen
+        name="Withdraw"
+        component={Withdraw}
+        options={{
+          tabBarLabel: 'Sacar'
+        }}
+      />
     </Tab.Navigator>
   )
 }
