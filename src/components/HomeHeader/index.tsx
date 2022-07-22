@@ -10,9 +10,16 @@ import { Icon } from '@rneui/themed'
 import { useNavigation } from '@react-navigation/native'
 import theme from '../../styles/theme'
 import Button from '../Button'
+import { useState } from 'react'
+import { formatToCurrency } from '../../utils/currencyFormatter'
 
 export default function HomeHeader() {
+  const BALANCE = 43123.12
+
+  const [isHide, setIsHide] = useState(true)
   const navigation = useNavigation()
+
+  const balanceFormatted = formatToCurrency(BALANCE, 'pt-BR', 'BRL')
 
   return (
     <View style={styles.container}>
@@ -31,9 +38,19 @@ export default function HomeHeader() {
       <View style={styles.moneyContainer}>
         <View style={styles.moneyContainerLeft}>
           <Text style={styles.moneyTitle}>Saldo disponível</Text>
-          <TouchableOpacity style={styles.moneyButton}>
-            <Text style={styles.moneyAmount}>R$ 1.000,00</Text>
-            <Icon type="feather" name="eye" size={20} color="#fff" />
+          <TouchableOpacity
+            style={styles.moneyButton}
+            onPress={() => setIsHide(!isHide)}
+          >
+            <Text style={styles.moneyAmount}>
+              {isHide ? ' • • • • ' : balanceFormatted}
+            </Text>
+            <Icon
+              type="feather"
+              name={isHide ? 'eye' : 'eye-off'}
+              size={20}
+              color="#fff"
+            />
           </TouchableOpacity>
         </View>
 
