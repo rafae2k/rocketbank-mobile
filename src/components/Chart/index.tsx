@@ -4,6 +4,7 @@ import * as haptic from 'expo-haptics'
 
 import * as S from './styles'
 import theme from '../../styles/theme'
+import { Text } from 'react-native'
 
 const data1 = [
   {
@@ -12,15 +13,15 @@ const data1 = [
   },
   {
     timestamp: 1625946300000,
-    value: 33545.25
+    value: 42545.25
   },
   {
     timestamp: 1625947200000,
-    value: 33510.25
+    value: 2310.25
   },
   {
     timestamp: 1625948100000,
-    value: 33215.25
+    value: 15215.25
   }
 ]
 
@@ -52,6 +53,12 @@ function invokeHaptic() {
 
 export default function Chart() {
   const [periodSelected, setPeriodSelected] = useState('1d')
+  const [clicked, setClicked] = useState(false)
+
+  const handleClick = () => {
+    setClicked(!clicked)
+    invokeHaptic()
+  }
 
   return (
     <S.Container>
@@ -61,8 +68,8 @@ export default function Chart() {
             <LineChart.Gradient />
           </LineChart.Path>
           <LineChart.CursorCrosshair
-            onActivated={invokeHaptic}
-            onEnded={invokeHaptic}
+            onActivated={handleClick}
+            onEnded={handleClick}
             color={periodSelected === '1d' ? 'red' : 'green'}
           >
             <LineChart.Tooltip
@@ -73,8 +80,34 @@ export default function Chart() {
             />
           </LineChart.CursorCrosshair>
         </LineChart>
-        <LineChart.PriceText />
-        <LineChart.DatetimeText />
+
+        <S.ChartDetails isClicked={clicked}>
+          <LineChart.PriceText
+            format={({ value }) => {
+              'worklet'
+              return `R$ ${value}`
+            }}
+            style={{
+              color: theme.colors.neutral.white,
+              fontSize: 16,
+              fontFamily: theme.fontWeight.medium
+            }}
+          />
+          <Text
+            style={{
+              color: theme.colors.neutral.white,
+              fontSize: 16,
+              fontFamily: theme.fontWeight.medium
+            }}
+          >&nbsp; em &nbsp;</Text>
+          <LineChart.DatetimeText
+            style={{
+              color: theme.colors.neutral.white,
+              fontSize: 16,
+              fontFamily: theme.fontWeight.medium
+            }}
+          />
+        </S.ChartDetails>
       </LineChart.Provider>
       <S.Wrapper>
         <S.ButtonWrapper>

@@ -13,6 +13,22 @@ export const Wrapper = styled.View`
     overflow: visible;
   `}
 `
+
+type ChartDetailsProps = {
+  isClicked: boolean
+}
+
+export const ChartDetails = styled.View<ChartDetailsProps>`
+  ${({ theme, isClicked }) => css`
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: ${theme.space.md} ${theme.space.base};
+
+    opacity: ${isClicked ? 1 : 0};
+  `}
+`
+
 export const ButtonWrapper = styled.View`
   flex-direction: row;
   justify-content: space-between;
