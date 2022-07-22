@@ -1,4 +1,6 @@
 import { Icon } from '@rneui/themed'
+import { TouchableOpacity, TouchableOpacityProps } from 'react-native'
+import { DefaultTheme, StyledComponent } from 'styled-components'
 import { IconProps } from '../../types/IconTypes'
 import * as S from './styles'
 
@@ -11,6 +13,7 @@ export type ButtonProps = {
   type?: 'filled' | 'outlined' | 'text'
   margin?: 'left' | 'right'
   operation?: 'buy' | 'sell'
+  disabled?: boolean
 }
 
 export default function Button({
@@ -21,7 +24,8 @@ export default function Button({
   iconPosition,
   label,
   icon,
-  handleClick
+  handleClick,
+  ...rest
 }: ButtonProps) {
   return (
     <S.Container
@@ -30,6 +34,7 @@ export default function Button({
       radius={radius}
       margin={margin}
       operation={operation}
+      disabled={rest.disabled}
     >
       {icon && iconPosition === 'left' && (
         <Icon
