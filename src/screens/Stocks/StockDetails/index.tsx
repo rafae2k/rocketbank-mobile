@@ -44,7 +44,7 @@ export default function StockDetails() {
         />
         <Button
           label="Vender"
-          operation="buy"
+          operation="sell"
           handleClick={() =>
             // @ts-ignore
             navigation.navigate('BuyOrSell', {
