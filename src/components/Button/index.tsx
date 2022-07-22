@@ -1,6 +1,4 @@
 import { Icon } from '@rneui/themed'
-import { TouchableOpacity, TouchableOpacityProps } from 'react-native'
-import { DefaultTheme, StyledComponent } from 'styled-components'
 import { IconProps } from '../../types/IconTypes'
 import * as S from './styles'
 

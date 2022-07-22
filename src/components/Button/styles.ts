@@ -9,7 +9,7 @@ const buttonModifiers = {
     margin-right: ${theme.space.base};
   `,
 
-  disabled: (theme: DefaultTheme) => css`
+  disabled: () => css`
     opacity: 0.5;
   `,
 
@@ -63,7 +63,7 @@ export const Container = styled.TouchableOpacity<
     ${margin === 'left' && buttonModifiers.left(theme)}
     ${margin === 'right' && buttonModifiers.right(theme)}
     
-    ${disabled && buttonModifiers.disabled(theme)}
+    ${disabled && buttonModifiers.disabled()}
     ${operation === 'sell' && buttonModifiers.sell(theme)}
   `}
 `
