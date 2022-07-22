@@ -1,15 +1,15 @@
 import { useNavigation } from '@react-navigation/native'
 import { useMemo, useState } from 'react'
-import { TouchableWithoutFeedback, Keyboard } from 'react-native'
+import { TouchableWithoutFeedback, Keyboard, FlatList } from 'react-native'
 import {
   AutocompleteDropdown,
   TAutocompleteDropdownItem
 } from 'react-native-autocomplete-dropdown'
-import { FlatList } from 'react-native-gesture-handler'
+
 import { SectionHeader, StockCard } from '../../components'
 import theme from '../../styles/theme'
-import { Item } from '../Home'
 import * as S from './styles'
+import { Item } from '../Home'
 
 const data = [
   {
@@ -92,7 +92,7 @@ export default function Stocks() {
             showsVerticalScrollIndicator={false}
             data={stocks}
             keyExtractor={(item) => String(item)}
-            renderItem={({ item }) => (
+            renderItem={() => (
               <S.Margin>
                 <StockCard
                   full
