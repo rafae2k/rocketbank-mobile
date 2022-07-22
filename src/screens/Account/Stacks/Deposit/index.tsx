@@ -3,10 +3,6 @@ import { Button } from '../../../../components'
 
 import * as S from './styles'
 
-// interface DepositProps {
-//   children: ReactNode
-// }
-
 export default function Deposit() {
   return (
     <S.Container>

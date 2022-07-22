@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components/native'
 
 export const Container = styled.View`
   ${({ theme }) => css`
-    /* flex: 1; */
     padding: ${theme.space.md} 0 0;
     height: 100%;
     overflow: visible;
@@ -26,7 +25,7 @@ export const ButtonWrapper = styled.View`
 `
 
 export const StockHeader = styled.View`
-  ${({ theme }) => css`
+  ${() => css`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -34,7 +33,7 @@ export const StockHeader = styled.View`
 `
 
 export const StockHeaderRight = styled.View`
-  ${({ theme }) => css`
+  ${() => css`
     flex-direction: row;
     align-items: center;
   `}

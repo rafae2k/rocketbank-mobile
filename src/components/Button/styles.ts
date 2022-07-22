@@ -8,6 +8,11 @@ const buttonModifiers = {
   right: (theme: DefaultTheme) => css`
     margin-right: ${theme.space.base};
   `,
+
+  disabled: () => css`
+    opacity: 0.5;
+  `,
+
   filled: (theme: DefaultTheme) => css`
     background-color: ${theme.colors.primary.brand};
     color: ${theme.colors.neutral.white};
@@ -30,7 +35,7 @@ const buttonModifiers = {
   halfRadius: (theme: DefaultTheme) => css`
     border-radius: ${theme.borderRadius.base};
   `,
-  buy: (theme: DefaultTheme) => css`
+  sell: (theme: DefaultTheme) => css`
     background-color: ${theme.colors.semantic.down};
   `
 }
@@ -38,7 +43,7 @@ const buttonModifiers = {
 export const Container = styled.TouchableOpacity<
   Omit<ButtonProps, 'label' | 'handleClick' | 'icon'>
 >`
-  ${({ theme, type, radius, margin, operation }) => css`
+  ${({ theme, type, radius, margin, operation, disabled }) => css`
     flex-direction: row;
     height: ${theme.space.xxl};
     flex: 1;
@@ -54,11 +59,12 @@ export const Container = styled.TouchableOpacity<
     ${radius === 'half' && buttonModifiers.halfRadius(theme)}
     ${radius === 'none' && buttonModifiers.noneRadius()}
     ${radius === 'full' && buttonModifiers.fullRadius(theme)}
-
+    
     ${margin === 'left' && buttonModifiers.left(theme)}
     ${margin === 'right' && buttonModifiers.right(theme)}
-
-    ${operation === 'buy' && buttonModifiers.buy(theme)}
+    
+    ${disabled && buttonModifiers.disabled()}
+    ${operation === 'sell' && buttonModifiers.sell(theme)}
   `}
 `
 
@@ -75,6 +81,6 @@ export const Label = styled.Text<
     ${type === 'filled' && buttonModifiers.filled(theme)}
     ${type === 'outlined' && buttonModifiers.outlinedLabel(theme)}
 
-    ${operation === 'buy' && buttonModifiers.buy(theme)}
+    ${operation === 'sell' && buttonModifiers.sell(theme)}
   `}
 `

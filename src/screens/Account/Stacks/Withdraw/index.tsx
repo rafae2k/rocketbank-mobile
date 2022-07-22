@@ -10,6 +10,7 @@ import CurrencyInput from 'react-native-currency-input'
 import * as S from './styles'
 import { Button } from '../../../../components'
 import { StatusBar } from 'expo-status-bar'
+import { BalanceInfo } from '../../../../components/BalanceInfo'
 
 const ACCOUNTS = [
   'Banco XP - CC 09123-4',
@@ -58,10 +59,10 @@ export default function Withdraw() {
               <S.Line />
             </S.InputWrapper>
 
-            <S.BalanceWrapper>
-              <S.BalanceText>Saldo disponível</S.BalanceText>
-              <S.Balance>R$ 200.012,00</S.Balance>
-            </S.BalanceWrapper>
+            <BalanceInfo
+              title="Saldo disponível"
+              balanceFormatted="R$ 200.012,00"
+            />
           </S.AmountWrapper>
 
           <S.ButtonWrapper>

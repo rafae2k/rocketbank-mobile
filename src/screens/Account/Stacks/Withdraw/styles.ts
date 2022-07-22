@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components/native'
-import CurrencyInput from 'react-native-currency-input'
 
 export const Container = styled.View`
   ${({ theme }) => css`
@@ -48,41 +47,6 @@ export const Line = styled.View`
     background-color: ${theme.colors.neutral.black};
     justify-content: center;
     margin-top: ${theme.space.base};
-  `}
-`
-
-export const Input = styled(CurrencyInput)`
-  ${({ theme }) => css`
-    width: 200px;
-    font-size: ${theme.fontSize.xxl};
-    font-family: ${theme.fontWeight.bold};
-  `}
-`
-
-export const BalanceWrapper = styled.View`
-  ${() => css`
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  `}
-`
-
-export const BalanceText = styled.Text`
-  ${({ theme }) => css`
-    font-size: ${theme.fontSize.base};
-    font-family: ${theme.fontWeight.medium};
-    color: ${theme.colors.neutral.black};
-    opacity: 0.6;
-    margin-right: ${theme.space.base};
-  `}
-`
-
-export const Balance = styled.Text`
-  ${({ theme }) => css`
-    font-size: ${theme.fontSize.lg};
-    font-family: ${theme.fontWeight.bold};
-    color: ${theme.colors.neutral.black};
-    opacity: 0.6;
   `}
 `
 
