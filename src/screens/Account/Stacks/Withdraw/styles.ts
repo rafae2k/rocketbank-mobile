@@ -51,14 +51,6 @@ export const Line = styled.View`
   `}
 `
 
-export const Input = styled(CurrencyInput)`
-  ${({ theme }) => css`
-    width: 200px;
-    font-size: ${theme.fontSize.xxl};
-    font-family: ${theme.fontWeight.bold};
-  `}
-`
-
 export const BalanceWrapper = styled.View`
   ${() => css`
     flex-direction: row;
