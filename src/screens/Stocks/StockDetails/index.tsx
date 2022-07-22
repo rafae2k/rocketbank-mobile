@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import { ImageSourcePropType } from 'react-native'
 import { Button, Chart } from '../../../components'
+import { StockInfoWithLogo } from '../../../components/StockInfoWithLogo'
 
 import * as S from './styles'
 
@@ -12,16 +13,13 @@ export default function StockDetails() {
       <S.Content>
         <S.StockHeader>
           <S.StockHeaderRight>
-            <S.StockImage
-              source={
-                require('../../../../assets/stocks/apple.png') as ImageSourcePropType
-              }
+            <StockInfoWithLogo
+              image="https://storage.googleapis.com/avenue-symlogos/AAPL.png"
+              stockCode="AAPL"
+              companyName="XP Investimentos"
+              big
+              onDark
             />
-
-            <S.StockHeaderWrapper>
-              <S.StockHeaderTitle>AAPL</S.StockHeaderTitle>
-              <S.StockHeaderSubtitle>Apple Inc.</S.StockHeaderSubtitle>
-            </S.StockHeaderWrapper>
           </S.StockHeaderRight>
 
           <S.StockPriceWrapper>
