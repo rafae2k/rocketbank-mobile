@@ -4,7 +4,7 @@ import Login from './Login'
 import Portfolio from './Portfolio'
 import Stocks from './Stocks'
 import StockDetails from './Stocks/StockDetails'
-import { Buy, Sell } from './BuyOrSell'
+import { Buy, Sell } from './Stocks/BuyOrSell'
 
 export {
   Deposit,

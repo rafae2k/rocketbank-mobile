@@ -1,23 +1,37 @@
 import { useState } from 'react'
 import { Keyboard, TouchableWithoutFeedback } from 'react-native'
 import RNPickerSelects from 'react-native-picker-select'
+import { RouteProp } from '@react-navigation/native'
 
 import * as S from './styles'
 import CurrencyInput from 'react-native-currency-input'
-import theme from '../../../styles/theme'
-import { Button } from '../../../components'
-import { formatToCurrency } from '../../../utils/currencyFormatter'
+import { useTickerQuotes } from '../../../../services/api/tickerQuotes'
+import { formatToCurrency } from '../../../../utils/currencyFormatter'
+import { BalanceInfo } from '../../../../components/BalanceInfo'
+import { Button } from '../../../../components'
+import theme from '../../../../styles/theme'
+import { TopTabBuyOrSellParamList } from '../../../../routes/TopTab'
 
-export default function Buy() {
-  const STOCK_PRICE = 10
-  const BALANCE = 100
-  const type = 'venda'
+type BuyProps = {
+  route: RouteProp<TopTabBuyOrSellParamList, 'Buy'>
+}
+
+export default function Buy({ route }: BuyProps) {
+  const BALANCE = 10000
+
+  const ticker = 'AAPL'
+
+  console.log(route)
+
+  // const { ticker } = route.params
+
+  const { data } = useTickerQuotes(ticker)
 
   const [state, setState] = useState({
     quantity: 0,
     total: 0,
-    buyerPower: BALANCE - STOCK_PRICE,
-    isAboveLimit: BALANCE < STOCK_PRICE
+    buyerPower: BALANCE - (data?.price || 0),
+    isAboveLimit: BALANCE < (data?.price || 0)
   })
 
   const [, setOrderType] = useState('')
@@ -27,16 +41,28 @@ export default function Buy() {
     setState({
       ...state,
       quantity: value,
-      total: value * STOCK_PRICE,
-      buyerPower: BALANCE - value * STOCK_PRICE,
-      isAboveLimit: BALANCE < value * STOCK_PRICE
+      total: value * (data?.price || 0),
+      buyerPower: BALANCE - value * (data?.price || 0),
+      isAboveLimit: BALANCE < value * (data?.price || 0)
     })
   }
 
-  const totalFormatted = formatToCurrency(state.total, 'pt-BR', 'BRL')
-  const priceFormatted = formatToCurrency(STOCK_PRICE, 'pt-BR', 'BRL')
-  const balanceFormatted = formatToCurrency(state.buyerPower, 'pt-BR', 'BRL')
-  const stockPriceFormatted = formatToCurrency(STOCK_PRICE, 'pt-BR', 'BRL')
+  const totalFormatted = formatToCurrency(state.total, 'pt-BR', data?.currency)
+  const priceFormatted = formatToCurrency(
+    data?.price || 0,
+    'pt-BR',
+    data?.currency
+  )
+  const balanceFormatted = formatToCurrency(
+    state.buyerPower,
+    'pt-BR',
+    data?.currency
+  )
+  const stockPriceFormatted = formatToCurrency(
+    data?.price || 0,
+    'pt-BR',
+    data?.currency
+  )
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -103,12 +129,11 @@ export default function Buy() {
             </S.InputWrapper>
           </S.ItemWrapper>
 
-          <S.BalanceWrapper>
-            <S.BalanceText>{`Poder de ${type}`}</S.BalanceText>
-            <S.Balance isAbove={state.isAboveLimit}>
-              {balanceFormatted}
-            </S.Balance>
-          </S.BalanceWrapper>
+          <BalanceInfo
+            title="Poder de Compra"
+            balanceFormatted={balanceFormatted}
+            isAboveLimit={state.isAboveLimit}
+          />
         </S.TopContainer>
 
         <S.CenterHeader>Detalhes</S.CenterHeader>
@@ -135,11 +160,7 @@ export default function Buy() {
         </S.RecipeContainer>
 
         <S.ButtonWrapper>
-          <Button
-            label="Vender"
-            disabled={state.isAboveLimit}
-            operation="sell"
-          />
+          <Button label="Comprar" disabled={state.isAboveLimit} />
         </S.ButtonWrapper>
       </S.Container>
     </TouchableWithoutFeedback>

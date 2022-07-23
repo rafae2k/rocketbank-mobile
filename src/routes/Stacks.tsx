@@ -1,21 +1,26 @@
+import { NavigatorScreenParams } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { Home, Portfolio, StockDetails, Stocks } from '../screens'
 import theme from '../styles/theme'
-import { Account as AccountTopTab, BuyOrSell } from './TopTab'
+import {
+  Account as AccountTopTab,
+  BuyOrSell,
+  TopTabAccountParamList,
+  TopTabBuyOrSellParamList
+} from './TopTab'
 
 export type StacksParamList = {
   Home: undefined
   Portfolio: undefined
   Stocks: undefined
-  AccountTopTab: undefined
+  AccountTopTab: NavigatorScreenParams<TopTabAccountParamList>
   Deposit: undefined
   Withdraw: undefined
   StockDetails: {
-    stockId: string
+    ticker: string
+    companyName: string
   }
-  BuyOrSell: {
-    stockId: string
-  }
+  BuyOrSell: NavigatorScreenParams<TopTabBuyOrSellParamList>
 }
 
 const headerOptionsDark = {
@@ -73,7 +78,9 @@ export const PortfolioStack = () => {
 
 export const StocksStack = () => {
   return (
-    <Stack.Navigator screenOptions={headerOptionsDark}>
+    <Stack.Navigator
+      screenOptions={{ ...headerOptionsDark, headerBackTitle: 'Voltar' }}
+    >
       <Stack.Screen
         name="Stocks"
         component={Stocks}
@@ -81,16 +88,21 @@ export const StocksStack = () => {
           headerTitle: 'Mercado'
         }}
       />
+
       <Stack.Screen
         name="StockDetails"
         component={StockDetails}
-        options={({ route }) => ({ title: route.params.stockId })}
+        options={({ route }) => ({
+          title: route.params.ticker
+        })}
       />
 
       <Stack.Screen
         name="BuyOrSell"
         component={BuyOrSell}
-        options={({ route }) => ({ title: route.params.stockId })}
+        options={({ route }) => ({
+          title: route.params.params?.ticker
+        })}
       />
     </Stack.Navigator>
   )

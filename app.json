@@ -27,6 +27,10 @@
       },
       "package": "com.rafae2k.rocketbankmobile"
     },
-    "description": ""
+    "description": "",
+    "extra": {
+      "flipper": "Flipper is running..."
+    },
+    "plugins": ["expo-community-flipper"]
   }
 }

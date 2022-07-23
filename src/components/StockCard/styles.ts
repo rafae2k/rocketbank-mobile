@@ -1,15 +1,74 @@
-import styled, { css } from 'styled-components/native'
+import styled, { css, DefaultTheme } from 'styled-components/native'
+import { StockCardProps } from '.'
 
-export const Wallet = styled.TouchableOpacity`
-  ${({ theme }) => css`
+const walletModifiers = {
+  hide: () => css`
+    display: none;
+  `,
+  up: (theme: DefaultTheme) => css`
+    color: ${theme.colors.primary.brand};
+  `,
+  column: () => css`
+    flex-direction: column;
+  `,
+  row: () => css`
+    flex-direction: row;
+  `,
+  marginRight: (theme: DefaultTheme) => css`
+    margin-right: ${theme.space.base};
+  `,
+  marginLeft: (theme: DefaultTheme) => css`
+    margin-left: ${theme.space.base};
+  `,
+  marginBottom: (theme: DefaultTheme) => css`
+    margin-bottom: ${theme.space.base};
+  `
+}
+
+export const Wrapper = styled.View<Pick<StockCardProps, 'full'>>`
+  ${({ full }) => css`
     flex-grow: 1;
     flex-direction: row;
-    align-items: center;
+    justify-content: space-between;
+
+    ${!full && walletModifiers.row()}
+  `}
+`
+
+export const StocksAmount = styled.Text<Pick<StockCardProps, 'full'>>`
+  ${({ theme, full }) => css`
+    font-family: ${theme.fontWeight.light};
+    ${!full && walletModifiers.hide()}
+  `}
+`
+
+export const PerformanceAmount = styled.Text<
+  Pick<StockCardProps, 'full' | 'performance'>
+>`
+  ${({ theme, full, performance }) => css`
+    font-family: ${theme.fontWeight.light};
+
+    ${performance === 'up' && walletModifiers.up(theme)}
+
+    ${!full && walletModifiers.hide()}
+  `}
+`
+
+export const Wallet = styled.TouchableOpacity<Pick<StockCardProps, 'full'>>`
+  ${({ theme, full }) => css`
+    flex-grow: 1;
+    flex-direction: row;
+    align-items: ${full ? 'center' : 'flex-start'}
     justify-content: space-between;
     padding: ${theme.space.md};
     border-radius: ${theme.borderRadius.base};
     border-width: 1px;
     border-color: ${theme.colors.neutral.grayLight};
+
+    ${full && walletModifiers.marginBottom(theme)}
+
+    ${!full && walletModifiers.marginRight(theme)}
+    ${!full && walletModifiers.column()}
   `}
 `
 export const PerformanceWrapper = styled.View`
@@ -22,48 +81,47 @@ export const PerformanceWrapper = styled.View`
 
 export const PerformanceText = styled.Text``
 
-export const PerformanceAmount = styled.Text``
-
-type PerformanceProps = { isUp?: boolean; isDown?: boolean }
+type PerformanceProps = Pick<StockCardProps, 'full' | 'performance'> & {
+  isUp?: boolean
+}
 
 export const MiddleWrapper = styled.View<PerformanceProps>`
-  ${() => css`
-    justify-content: center;
+  ${({ theme, full }) => css`
+    ${!full && walletModifiers.marginLeft(theme)}
+    ${!full && walletModifiers.row()}
   `}
 
   ${PerformanceAmount} {
-    ${({ theme, isUp, isDown }) => css`
+    ${({ theme, isUp }) => css`
       font-family: ${theme.fontWeight.medium};
-      color: ${isUp
-    ? theme.colors.primary.brand
-    : isDown
-      ? theme.colors.semantic.down
-      : theme.colors.neutral.gray};
+      color: ${isUp ? theme.colors.primary.brand : theme.colors.semantic.down};
     `}
 
     ${PerformanceText} {
-      ${({ theme, isUp, isDown }) => css`
+      ${({ theme, isUp }) => css`
         font-family: ${theme.fontWeight.medium};
         color: ${isUp
     ? theme.colors.primary.brand
-    : isDown
-      ? theme.colors.semantic.down
-      : theme.colors.neutral.gray};
+    : theme.colors.semantic.down};
       `}
     }
   }
 `
 export const leftWrapper = styled.View`
   ${() => css`
+    flex-grow: 1;
     align-items: flex-end;
   `}
 `
 
-export const AmountWrapper = styled.View`
-  ${({ theme }) => css`
+export const AmountWrapper = styled.View<
+  Pick<StockCardProps, 'full' | 'performance'>
+>`
+  ${({ theme, full }) => css`
     flex-direction: row;
     align-items: flex-end;
-    margin-bottom: ${theme.space.base};
+    margin-bottom: ${full ? theme.space.base : 0};
+    margin-top: ${!full ? theme.space.base : 0};
   `}
 `
 export const Currency = styled.Text`
@@ -73,6 +131,7 @@ export const Currency = styled.Text`
     line-height: ${theme.fontSize.lg};
     color: ${theme.colors.text.onBackground};
     margin-left: ${theme.space.xs};
+    margin-right: ${theme.space.sm};
   `}
 `
 

@@ -1,68 +1,51 @@
 import { useState } from 'react'
-import { LineChart } from 'react-native-wagmi-charts'
+import { LineChart, TLineChartDataProp } from 'react-native-wagmi-charts'
 import * as haptic from 'expo-haptics'
-
-import * as S from './styles'
-import theme from '../../styles/theme'
+import { DataRanges, useTickerQuotes } from '../../services/api/tickerQuotes'
 import { Text } from 'react-native'
 
-const data1 = [
-  {
-    timestamp: 1625945400000,
-    value: 33575.25
-  },
-  {
-    timestamp: 1625946300000,
-    value: 42545.25
-  },
-  {
-    timestamp: 1625947200000,
-    value: 2310.25
-  },
-  {
-    timestamp: 1625948100000,
-    value: 15215.25
-  }
-]
+import theme from '../../styles/theme'
+import * as S from './styles'
 
-const data2 = [
-  {
-    timestamp: 162945400000,
-    value: 1
-  },
-  {
-    timestamp: 1625946300000,
-    value: 2
-  },
-  {
-    timestamp: 1625947200000,
-    value: 5
-  },
-  {
-    timestamp: 1625948100000,
-    value: 20
-  }
+const periods: DataRanges[] = [
+  '1d',
+  '5d',
+  '1mo',
+  '6mo',
+  '1y',
+  '5y',
+  'ytd',
+  'max'
 ]
-
-const periods = ['1d', '5d', '1M', '6M', 'YTD', '1Y', '5Y', 'MAX']
 
 function invokeHaptic() {
   // eslint-disable-next-line
   void haptic.impactAsync(haptic.ImpactFeedbackStyle.Light)
 }
 
-export default function Chart() {
-  const [periodSelected, setPeriodSelected] = useState('1d')
+type ChartProps = {
+  ticker: string
+}
+
+export default function Chart({ ticker }: ChartProps) {
+  const [periodSelected] = useState('1d')
   const [clicked, setClicked] = useState(false)
+  const [range, setRange] = useState<DataRanges>('1d')
+
+  const { isLoading, data } = useTickerQuotes(ticker, range)
 
   const handleClick = () => {
     setClicked(!clicked)
     invokeHaptic()
   }
 
+  if (isLoading) {
+    return <Text>Loading...</Text>
+  }
+
   return (
     <S.Container>
-      <LineChart.Provider data={periodSelected === '1d' ? data1 : data2}>
+      <LineChart.Provider data={data?.chartData as TLineChartDataProp}>
         <LineChart>
           <LineChart.Path color={periodSelected === '1d' ? 'red' : 'green'}>
             <LineChart.Gradient />
@@ -99,7 +82,9 @@ export default function Chart() {
               fontSize: 16,
               fontFamily: theme.fontWeight.medium
             }}
-          >&nbsp; em &nbsp;</Text>
+          >
+            &nbsp; em &nbsp;
+          </Text>
           <LineChart.DatetimeText
             style={{
               color: theme.colors.neutral.white,
@@ -114,10 +99,10 @@ export default function Chart() {
           {periods.map((period) => (
             <S.Button
               key={period}
-              onPress={() => setPeriodSelected(period)}
-              isSelected={period === periodSelected}
+              onPress={() => setRange(period)}
+              isSelected={period === range}
             >
-              <S.ButtonText isSelected={period === periodSelected}>
+              <S.ButtonText isSelected={period === range}>
                 {period}
               </S.ButtonText>
             </S.Button>

@@ -2,6 +2,20 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { Deposit, Withdraw, Buy, Sell } from '../screens'
 import theme from '../styles/theme'
 
+export type TopTabAccountParamList = {
+  Deposit: undefined
+  Withdraw: undefined
+}
+
+export type TopTabBuyOrSellParamList = {
+  Buy: {
+    ticker: string
+  }
+  Sell: {
+    ticker: string
+  }
+}
+
 const headerOptionsDark = {
   tabBarStyle: {
     backgroundColor: theme.colors.darkBackground
