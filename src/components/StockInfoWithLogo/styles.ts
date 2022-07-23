@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components/native'
 import { StockInfoWithLogoProps } from '.'
 
 export const Container = styled.View<Pick<StockInfoWithLogoProps, 'big'>>`
-  ${({ theme, big }) => css`
+  ${({ big }) => css`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
