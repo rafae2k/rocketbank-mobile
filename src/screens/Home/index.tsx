@@ -1,15 +1,13 @@
 import 'react-native-gesture-handler'
-import { FlatList, View } from 'react-native'
-import { setStatusBarStyle, StatusBar } from 'expo-status-bar'
-import {
-  HomeHeader,
-  Portfolio,
-  SectionHeader,
-  StocksHome
-} from '../../components'
-import * as S from './styles'
 import { useMemo } from 'react'
+import { FlatList, View } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import _ from 'lodash'
+
+import { HomeHeader, SectionHeader, StockCard } from '../../components'
+import * as S from './styles'
 import theme from '../../styles/theme'
+import { STOCKS } from '../../utils/constants/stocksCodes'
 
 export type Item = {
   key: string
@@ -18,7 +16,7 @@ export type Item = {
 }
 
 export default function Home() {
-  setStatusBarStyle('light')
+  const navigation = useNavigation()
 
   const { sections, sectionIndexes } = useMemo(() => {
     const items: Item[] = [
@@ -42,7 +40,27 @@ export default function Home() {
         key: 'STOCKS_LIST',
         render: () => (
           <S.SectionWrapper>
-            <StocksHome />
+            <FlatList
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+              data={_.shuffle(STOCKS)}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => (
+                <StockCard
+                  ticker={item.id}
+                  companyName={item.name}
+                  performance="up"
+                  handleClick={() =>
+                    // @ts-ignore
+                    navigation.navigate('StockDetails', {
+                      companyName: item.name,
+                      ticker: item.id
+                    })
+                  }
+                />
+              )}
+            />
           </S.SectionWrapper>
         )
       },
@@ -65,9 +83,26 @@ export default function Home() {
       {
         key: 'PORTFOLIO_LIST',
         render: () => (
-          <S.SectionWrapper>
-            <Portfolio />
-          </S.SectionWrapper>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            data={STOCKS}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <StockCard
+                ticker={item.id}
+                companyName={item.name}
+                full
+                performance="up"
+                handleClick={() =>
+                  // @ts-ignore
+                  navigation.navigate('StockDetails', {
+                    ticker: item.id,
+                    companyName: item.name
+                  })
+                }
+              />
+            )}
+          />
         )
       }
     ]
@@ -80,11 +115,10 @@ export default function Home() {
       sections: items,
       sectionIndexes
     }
-  }, [])
+  }, [navigation])
 
   return (
     <View style={{ backgroundColor: 'white', overflow: 'visible' }}>
-      <StatusBar style="light" />
       <S.SectionWrapper>
         <HomeHeader />
       </S.SectionWrapper>
