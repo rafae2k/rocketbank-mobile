@@ -1,26 +1,34 @@
-import theme from '../../styles/theme'
-import * as S from './styles'
 import { Feather } from '@expo/vector-icons'
+import { useTickerQuotes } from '../../services/api/tickerQuotes'
+
+import * as S from './styles'
+import theme from '../../styles/theme'
 import { StockInfoWithLogo } from '../StockInfoWithLogo'
 
 export type StockCardProps = {
+  handleClick?: () => void
   full?: boolean
   performance?: 'up' | 'down' | 'equal'
-  handleClick?: () => void
+  ticker: string
+  companyName: string
 }
 
 export default function StockCard({
   full = false,
   performance,
-  handleClick
+  handleClick,
+  ticker,
+  companyName
 }: StockCardProps) {
+  const { data } = useTickerQuotes(ticker)
+
   return (
     <S.Wallet onPress={handleClick} full={full}>
       <S.Wrapper full={full}>
         <StockInfoWithLogo
-          image="https://storage.googleapis.com/avenue-symlogos/AAPL.png"
-          stockCode="AAPL"
-          companyName="XP Investimentos"
+          image={`https://storage.googleapis.com/avenue-symlogos/${ticker}.png`}
+          stockCode={ticker}
+          companyName={companyName}
         />
 
         <S.MiddleWrapper isUp={performance === 'up'} full={full}>
@@ -43,8 +51,8 @@ export default function StockCard({
 
       <S.leftWrapper>
         <S.AmountWrapper full={full}>
-          <S.Currency>R$</S.Currency>
-          <S.Amount>121.000,00</S.Amount>
+          <S.Currency>{data?.currency}</S.Currency>
+          <S.Amount>{data?.price.toFixed(2)}</S.Amount>
         </S.AmountWrapper>
         <S.StocksAmount full={full}>123 Ações</S.StocksAmount>
       </S.leftWrapper>

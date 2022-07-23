@@ -25,8 +25,9 @@ const walletModifiers = {
   `
 }
 
-export const Wrapper = styled.View<StockCardProps>`
+export const Wrapper = styled.View<Pick<StockCardProps, 'full'>>`
   ${({ full }) => css`
+    flex-grow: 1;
     flex-direction: row;
     justify-content: space-between;
 
@@ -34,14 +35,16 @@ export const Wrapper = styled.View<StockCardProps>`
   `}
 `
 
-export const StocksAmount = styled.Text<StockCardProps>`
+export const StocksAmount = styled.Text<Pick<StockCardProps, 'full'>>`
   ${({ theme, full }) => css`
     font-family: ${theme.fontWeight.light};
     ${!full && walletModifiers.hide()}
   `}
 `
 
-export const PerformanceAmount = styled.Text<StockCardProps>`
+export const PerformanceAmount = styled.Text<
+  Pick<StockCardProps, 'full' | 'performance'>
+>`
   ${({ theme, full, performance }) => css`
     font-family: ${theme.fontWeight.light};
 
@@ -51,7 +54,7 @@ export const PerformanceAmount = styled.Text<StockCardProps>`
   `}
 `
 
-export const Wallet = styled.TouchableOpacity<StockCardProps>`
+export const Wallet = styled.TouchableOpacity<Pick<StockCardProps, 'full'>>`
   ${({ theme, full }) => css`
     flex-grow: 1;
     flex-direction: row;
@@ -84,7 +87,6 @@ type PerformanceProps = Pick<StockCardProps, 'full' | 'performance'> & {
 
 export const MiddleWrapper = styled.View<PerformanceProps>`
   ${({ theme, full }) => css`
-    margin-left: ${theme.space.md};
     ${!full && walletModifiers.marginLeft(theme)}
     ${!full && walletModifiers.row()}
   `}
@@ -107,6 +109,7 @@ export const MiddleWrapper = styled.View<PerformanceProps>`
 `
 export const leftWrapper = styled.View`
   ${() => css`
+    flex-grow: 1;
     align-items: flex-end;
   `}
 `
@@ -128,6 +131,7 @@ export const Currency = styled.Text`
     line-height: ${theme.fontSize.lg};
     color: ${theme.colors.text.onBackground};
     margin-left: ${theme.space.xs};
+    margin-right: ${theme.space.sm};
   `}
 `
 
