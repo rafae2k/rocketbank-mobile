@@ -26,7 +26,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Run ESLint
-        run: pnpm lint
+        run: yarn lint
 
   Build:
     runs-on: ubuntu-latest
