@@ -1,12 +1,23 @@
 import { useNavigation } from '@react-navigation/native'
-import { ImageSourcePropType } from 'react-native'
+import type { RouteProp } from '@react-navigation/native'
 import { Button, Chart } from '../../../components'
 import { StockInfoWithLogo } from '../../../components/StockInfoWithLogo'
+import { StacksParamList } from '../../../routes/Stacks'
 
 import * as S from './styles'
+import { useTickerQuotes } from '../../../services/api/tickerQuotes'
+import { formatToCurrency } from '../../../utils/currencyFormatter'
 
-export default function StockDetails() {
+type StockDetailsProps = {
+  route: RouteProp<StacksParamList, 'StockDetails'>
+}
+
+export default function StockDetails({ route }: StockDetailsProps) {
   const navigation = useNavigation()
+
+  const { ticker, companyName } = route.params
+
+  const { data } = useTickerQuotes(ticker)
 
   return (
     <S.Container>
@@ -14,20 +25,26 @@ export default function StockDetails() {
         <S.StockHeader>
           <S.StockHeaderRight>
             <StockInfoWithLogo
-              image="https://storage.googleapis.com/avenue-symlogos/AAPL.png"
-              stockCode="AAPL"
-              companyName="XP Investimentos"
+              image={`https://storage.googleapis.com/avenue-symlogos/${ticker}.png`}
+              stockCode={ticker}
+              companyName={companyName}
               big
               onDark
             />
           </S.StockHeaderRight>
 
           <S.StockPriceWrapper>
-            <S.StockPrice>R$ 1.232,00</S.StockPrice>
+            <S.StockPrice>
+              {formatToCurrency(
+                data?.price || 0,
+                'pt-BR',
+                data?.currency || 'BRL'
+              )}
+            </S.StockPrice>
           </S.StockPriceWrapper>
         </S.StockHeader>
       </S.Content>
-      <Chart />
+      <Chart ticker={ticker} />
       <S.ButtonsWrapper>
         <Button
           label="Comprar"
@@ -35,8 +52,8 @@ export default function StockDetails() {
           handleClick={() =>
             // @ts-ignore
             navigation.navigate('BuyOrSell', {
-              stockId: 'AAPL',
-              screen: 'BUY'
+              screen: 'BUY',
+              params: { ticker }
             })
           }
         />
@@ -46,8 +63,8 @@ export default function StockDetails() {
           handleClick={() =>
             // @ts-ignore
             navigation.navigate('BuyOrSell', {
-              stockId: 'AAPL',
-              screen: 'SELL'
+              screen: 'SELL',
+              params: { ticker }
             })
           }
         />
