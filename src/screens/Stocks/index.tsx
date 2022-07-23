@@ -1,6 +1,11 @@
 import { useNavigation } from '@react-navigation/native'
-import { useMemo, useState } from 'react'
-import { TouchableWithoutFeedback, Keyboard, FlatList } from 'react-native'
+import { useCallback, useMemo, useRef, useState } from 'react'
+import {
+  TouchableWithoutFeedback,
+  Keyboard,
+  FlatList,
+  Platform
+} from 'react-native'
 import {
   AutocompleteDropdown,
   TAutocompleteDropdownItem
@@ -10,29 +15,17 @@ import { SectionHeader, StockCard } from '../../components'
 import theme from '../../styles/theme'
 import * as S from './styles'
 import { Item } from '../Home'
-
-const data = [
-  {
-    id: 'APPL',
-    title: 'APPL - Apple Inc'
-  },
-  {
-    id: 'PETR4',
-    title: 'PETR4 - Petrobras '
-  },
-  {
-    id: 'VVAR3',
-    title: 'VVAR3 - Viavarejo'
-  }
-]
-
-const stocks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+import { useTickerAutocomplete } from '../../services/api/tickerAutocomplete'
+import { STOCKS } from '../../utils/constants/stocksCodes'
 
 export default function Stocks() {
+  const navigation = useNavigation()
+
   const [selectedItem, setSelectedItem] =
     useState<TAutocompleteDropdownItem | null>(null)
-
-  const navigation = useNavigation()
+  const dropdownController = useRef(null)
+  const searchRef = useRef(null)
+  const [ticker, setTicker] = useState('')
 
   const { sections, sectionsIndexes } = useMemo(() => {
     let searchResult: Item[] = []
@@ -42,24 +35,25 @@ export default function Stocks() {
         {
           key: 'SEARCH_RESULT',
           isHeader: true,
-          render: () => <SectionHeader title="Resultados" />
+          render: () => <SectionHeader title="Resultado da pesquisa" />
         },
         {
           key: 'STOCK',
           isHeader: false,
           render: () => (
-            <S.Margin>
-              <StockCard
-                full
-                performance="up"
-                handleClick={() =>
-                  // @ts-ignore
-                  navigation.navigate('StockDetails', {
-                    stockId: 'AAPL'
-                  })
-                }
-              />
-            </S.Margin>
+            <StockCard
+              ticker={selectedItem.id}
+              companyName={selectedItem?.title?.split('- ')[1] as string}
+              full
+              performance="up"
+              handleClick={() =>
+                // @ts-ignore
+                navigation.navigate('StockDetails', {
+                  ticker: selectedItem.id,
+                  companyName: selectedItem?.title?.split('- ')[1] as string
+                })
+              }
+            />
           )
         }
       ]
@@ -71,18 +65,16 @@ export default function Stocks() {
         key: 'STOCKS_HEADER',
         isHeader: true,
         render: () => (
-          <S.Margin>
-            <SectionHeader
-              title="Ações"
-              icon={{
-                handleClick: () => {},
-                type: 'feather',
-                color: theme.colors.neutral.black,
-                size: 24,
-                iconName: 'chevron-right'
-              }}
-            />
-          </S.Margin>
+          <SectionHeader
+            title="Ações"
+            icon={{
+              handleClick: () => {},
+              type: 'feather',
+              color: theme.colors.neutral.black,
+              size: 24,
+              iconName: 'chevron-right'
+            }}
+          />
         )
       },
       {
@@ -90,21 +82,22 @@ export default function Stocks() {
         render: () => (
           <FlatList
             showsVerticalScrollIndicator={false}
-            data={stocks}
-            keyExtractor={(item) => String(item)}
-            renderItem={() => (
-              <S.Margin>
-                <StockCard
-                  full
-                  performance="up"
-                  handleClick={() =>
-                    // @ts-ignore
-                    navigation.navigate('StockDetails', {
-                      stockId: 'AAPL'
-                    })
-                  }
-                />
-              </S.Margin>
+            data={STOCKS}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <StockCard
+                ticker={item.id}
+                companyName={item.name}
+                full
+                performance="up"
+                handleClick={() =>
+                  // @ts-ignore
+                  navigation.navigate('StockDetails', {
+                    ticker: item.id,
+                    companyName: item.name
+                  })
+                }
+              />
             )}
           />
         )
@@ -121,16 +114,32 @@ export default function Stocks() {
     }
   }, [navigation, selectedItem])
 
+  const { isLoading, data, refetch } = useTickerAutocomplete(ticker)
+
+  const onClearPress = useCallback(() => {
+    setSelectedItem(null)
+  }, [])
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <S.Container>
         <AutocompleteDropdown
-          clearOnFocus={false}
-          closeOnBlur={true}
-          closeOnSubmit={false}
-          initialValue={{ id: '2' }} // or just '2'
-          onSelectItem={(item) => setSelectedItem(item)}
+          // @ts-ignore
+          ref={searchRef}
+          controller={(controller) => {
+            // @ts-ignore
+            dropdownController.current = controller
+          }}
+          direction={Platform.select({ ios: 'down' })}
           dataSet={data}
+          onChangeText={(e) => setTicker(e)}
+          onSelectItem={(item) => setSelectedItem(item)}
+          debounce={400}
+          suggestionsListMaxHeight={400}
+          onClear={onClearPress}
+          onSubmit={() => void refetch()}
+          loading={isLoading}
+          useFilter={false}
           containerStyle={{
             alignItems: 'center',
             justifyContent: 'center',
