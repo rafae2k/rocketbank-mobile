@@ -18,7 +18,7 @@
     Rocket Bank is a mobile application made with React Native. You can track your portfolio performance, make deposits and withdrawals, and buy and sell stocks.
     <br />
     <br />
-    <a href="http://rocketbank.com/">View Live</a>
+    <a href="https://snack.expo.dev/@rafae2k/694e1f">View Live</a>
     ·
     <a href="https://github.com/rafae2k/rocketbank-mobile/issues">Report Bug</a>
     ·
