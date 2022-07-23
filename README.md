@@ -15,7 +15,7 @@
     </br>
 
   <p align="center">
-    Rocket Bank is a mobile application made with React Native. You can track your portfolio performance, make deposits and withdrawals, buy and sell stocks.
+    Rocket Bank is a mobile application made with React Native. You can track your portfolio performance, make deposits and withdrawals, and buy and sell stocks.
     <br />
     <br />
     <a href="http://rocketbank.com/">View Live</a>
@@ -30,7 +30,7 @@
   <img src="docs/assets/app-home.png" width="200" />
   <img src="docs/assets/app-buy.png" width="200" /> 
   <img src="docs/assets/app-withdraw.png" width="200" />
-  <img src="docs/assets/app-gif.gif" width="185" />
+  <img src="docs/assets/app-demo.gif" width="185" />
 </p>
 
 <!-- TABLE OF CONTENTS -->
@@ -38,7 +38,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#How-it-was-made">How it was made</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
@@ -67,7 +67,12 @@
   - design
   - components
   - screens
+  - logic
   - issues/bug's
+
+<p float='center'>
+  <img src="docs/assets/kanban.png" width="600" alt="Github Kanban Board" />
+</p>
 
 That where being moved to the next stage soon as i opened the Pull Request, and then moved to the next stage when the Pull Request was merged into main branch.
 
@@ -80,13 +85,12 @@ That where being moved to the next stage soon as i opened the Pull Request, and 
 
 ### Built With
 
-This blog was build with JAMstack architecture, fast, reliable and SEO focused.
-
 - 🎯 [Typescript](https://www.typescriptlang.org/)
 - 📲 [React Native](https://reactnative.dev/)
 - 💅 [Styled-components](https://tailwindcss.com/)
 - 🧩 [Expo](https://www.expo.dev)
 - ⛵️ [React Navigation](https://reactnavigation.org/)
+- 🦙 [Alpaca Market Data](https://https://alpaca.markets//)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -94,17 +98,9 @@ This blog was build with JAMstack architecture, fast, reliable and SEO focused.
 
 ## Getting Started
 
-Vercel Blog Deploy
-
-- [https://try-catch-blog.vercel.app/](https://try-catch-blog.vercel.app/)
-
-Storybook Deploy
-
-- [https://try-catch-storybook.vercel.app/](https://try-catch-storybook.vercel.app/)
-
 Expo Snack - Test the app on your on web or on your phone.
 
-[Click Here to run the app on Expo Snack](https://snack.expo.dev/@rafae2k/rafo---uber-clone)
+[Click Here to run the app on Expo Snack](https://snack.expo.dev/@rafae2k/694e1f)
 
 - You can run on Web emulator of Expo Snack only on iOS or Android (Web doesn't work yet for this project) or on your device reading the QR code on Expo Go App.
 
@@ -132,10 +128,6 @@ yarn global add expo-cli
    git clone https://github.com/rafae2k/rocketbank-mobile.git
    ```
 
-   ```
-
-   ```
-
 2. Install NPM packages
    ```sh
    yarn install
@@ -146,7 +138,7 @@ yarn global add expo-cli
    ```
 4. Running on your phone
 
-   press `c` on terminal and read the QR code with Expo GO app installed
+   press `c` on terminal and read the QR code with Expo GO app installed or press `i` to run on iOS emulator (only available on MacOS) or `a` to run on Android emulator
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -157,11 +149,13 @@ yarn global add expo-cli
 - [x] Create Figma prototype
 - [x] Create Navigation Tabs with React Navigation
 - [x] Implement screens for login, register, home, buy/sell, portfolio, market and deposit/withdraw
+- [x] Add autocomplete search for stocks
+- [x] Add real stock data from Alpaca Market Data
 - [x] Add auth with Face Id and biometrics and save user data to secure storage
-- [] Add animations to screens
-- [] Integrate Alpaca and Coinbase APIs to get realtime data
-- [] Integration with firebase auth
-- [] Fix styles bug's
+- [ ] Sign up and Integration with firebase auth
+- [ ] Fix styles bug's
+- [ ] Add animations to screens
+- [ ] Add micro interactivity to screens (haptics)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
