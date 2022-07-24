@@ -40,7 +40,7 @@
       <a href="#How-it-was-made">How it was made</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
-        <li><a href="#problems">Problems</a></li>
+        <li><a href="#difficulties">Difficulties</a></li>
       </ul>
     </li>
     <li>
@@ -98,7 +98,7 @@ That where being moved to the next stage soon as i opened the Pull Request, and 
 
 <!-- PROBLEMS FACED -->
 
-### Problems
+### Difficulties
 
 - Learn and understand **_react navigation_** lib and how to work with nested screens and routes and correctly type it.
 
@@ -157,6 +157,17 @@ yarn global add expo-cli
 4. Running on your phone
 
    press `c` on terminal and read the QR code with Expo GO app installed or press `i` to run on iOS emulator (only available on MacOS) or `a` to run on Android emulator
+   
+5. Login 
+   
+   This app doesn't have a real authenticantication check in addition to Hardward Biometrics Authentication, but some business logic we're added, so at the first time you open the app, you need to enter an valid `email` and a `password` with at least 8 characthers, after that, every time you open the app you''ll be automatically logged in with Hardware Biometrics (Face ID/Fingerprint).
+   
+   
+### Know Issues
+
+- Links on `Home` don't work at first, you need to manually navigate do account and market bottom tabs to bottons on `Homescreen` correctly navigate to screens.
+
+- Back button on header of `BottonTab's (Navbar)` screens navigate to login page beacause the index route stack, others nested `screens (Stacks)` work correctly keeping navigation history and with back button returning to the last page that user navigated.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
