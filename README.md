@@ -168,9 +168,9 @@ yarn global add expo-cli
    
 ### Know Issues
 
-- Links on `Home` don't work at first, you need to manually navigate do account and market bottom tabs to buttons on `Homescreen` correctly navigate to screens.
+- Links on `Home` don't work at first. You need to manually navigate to account (Conta) and market (Bolsa) screens via the bottom tabs to deposit, withdraw and stocks cards buttons correctly navigate to its screens.
 
-- Back button on the header of `BottonTab's (Navbar)` screens navigate to the login page because the index route stack, and other nested `screens (Stacks)` work correctly keeping navigation history and with the back button returning to the last page that user navigated.
+- Back button on the header of `BottonTab's (Navbar)` screens navigate to the login page, others nested `screens (Stacks)` work correctly keeping navigation history and with the back button returning to the last page that user navigated.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -188,6 +188,7 @@ yarn global add expo-cli
 - [ ] Fix styles bug's
 - [ ] Add animations to screens
 - [ ] Add micro interactivity to screens (haptics)
+- [ ] Tests (E2E and Unit)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
