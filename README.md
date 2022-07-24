@@ -64,19 +64,19 @@
 
 Rocket Bank was my second attempt at building a mobile application, my first was [Uber Clone](https://github.com/rafae2k/uber-clone).
 
-- Used github projects to build an automated Kanban board, by creating issues/TODO's
+- Used GitHub projects to build an automated Kanban board, by creating issues/TODOs
   - requirements
   - design
   - components
   - screens
   - logic
-  - issues/bug's
+  - issues/bugs
 
 <p float='center'>
   <img src="docs/assets/kanban.png" width="600" alt="Github Kanban Board" />
 </p>
 
-That where being moved to the next stage soon as i opened the Pull Request, and then moved to the next stage when the Pull Request was merged into main branch.
+Then the cards were moved to the next stage soon as I opened the Pull Request and then moved to the next stage when the Pull Request was merged into the main branch.
 
 - The standardization of the project was done with:
   - **_Commitlint_** to check the commit message following Angular's style.
@@ -100,15 +100,15 @@ That where being moved to the next stage soon as i opened the Pull Request, and 
 
 ### Difficulties
 
-- Learn and understand **_react navigation_** lib and how to work with nested screens and routes and correctly type it.
+- Learn and understand **_react navigation_** lib and how to work with nested screens and routes and correctly type them.
 
 - **_Typescript types_** and **_Eslint_** rules and configuration
 
-- **_Styled-components:_** was difficult to know that some styles didn't work on native that I was used on web development, like `gap` and different implementation of `flex`.
+- **_Styled-components:_** was difficult to know that some styles didn't work on native that I was used on web development, like `gap` and different implementations of `flex`.
 
-- Work with native components like, `FlatList` and `ScrollView`, `KeyboardAvoidingView`, as much the project was becoming more complex, and nesting components generated errors, like `ScrollView` inside a `ScrollView`.
+- Work with native components like, `FlatList` and `ScrollView`, `KeyboardAvoidingView`, as the project was becoming more complex, and nesting components generated errors, like `ScrollView` inside a `ScrollView`.
 
-- **_Debugging:_** was difficult to understand how to debug the app styles and state and setup flipper to work with expo.
+- **_Debugging:_** was difficult to understand how to debug the app styles and state and set up flipper to work with Expo.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -120,7 +120,10 @@ Expo Snack - Test the app on web or on your phone.
 
 [Click Here to run the app on Expo Snack](https://snack.expo.dev/@rafae2k/694e1f)
 
-- You can run on Web emulator of Expo Snack only on iOS or Android (Web doesn't work yet for this project) or on your device reading the QR code on Expo Go App.
+- You can run on the Web emulator of Expo Snack only on iOS or Android (Web doesn't work yet for this project) or on your device by reading the QR code and run on Expo Go App.
+
+***ATENTION***
+Although this app is multiplatform, it was only tested on iOS, so some functionalities may not work correctly 
 
 ### Prerequisites
 
@@ -156,18 +159,18 @@ yarn global add expo-cli
    ```
 4. Running on your phone
 
-   press `c` on terminal and read the QR code with Expo GO app installed or press `i` to run on iOS emulator (only available on MacOS) or `a` to run on Android emulator
+   press `c` on the terminal and read the QR code with the Expo GO app installed or press `i` to run on the iOS emulator (only available on macOS) or `a` to run on the Android emulator
    
 5. Login 
    
-   This app doesn't have a real authenticantication check in addition to Hardward Biometrics Authentication, but some business logic we're added, so at the first time you open the app, you need to enter an valid `email` and a `password` with at least 8 characthers, after that, every time you open the app you''ll be automatically logged in with Hardware Biometrics (Face ID/Fingerprint).
+   This app doesn't have a real authentication check in addition to Hardware Biometrics Authentication, but some business logic we're added, so the first time you open the app, you need to enter a valid email and a password with at least 8 characters, after that, every time you open the app you'll be automatically logged in with Hardware Biometrics (Face ID/Fingerprint).
    
    
 ### Know Issues
 
-- Links on `Home` don't work at first, you need to manually navigate do account and market bottom tabs to bottons on `Homescreen` correctly navigate to screens.
+- Links on `Home` don't work at first, you need to manually navigate do account and market bottom tabs to buttons on `Homescreen` correctly navigate to screens.
 
-- Back button on header of `BottonTab's (Navbar)` screens navigate to login page beacause the index route stack, others nested `screens (Stacks)` work correctly keeping navigation history and with back button returning to the last page that user navigated.
+- Back button on the header of `BottonTab's (Navbar)` screens navigate to the login page because the index route stack, and other nested `screens (Stacks)` work correctly keeping navigation history and with the back button returning to the last page that user navigated.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -177,7 +180,7 @@ yarn global add expo-cli
 
 - [x] Create Figma prototype
 - [x] Create Navigation Tabs with React Navigation
-- [x] Implement screens for login, register, home, buy/sell, portfolio, market and deposit/withdraw
+- [x] Implement screens for login, register, home, buy/sell, portfolio, market, and deposit/withdraw
 - [x] Add autocomplete search for stocks
 - [x] Add real stock data from Alpaca Market Data
 - [x] Add auth with Face Id and biometrics and save user data to secure storage
