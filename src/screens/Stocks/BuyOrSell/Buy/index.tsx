@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Keyboard, TouchableWithoutFeedback } from 'react-native'
 import RNPickerSelects from 'react-native-picker-select'
-import { RouteProp } from '@react-navigation/native'
+import { NavigationProp, RouteProp } from '@react-navigation/native'
 
 import * as S from './styles'
 import CurrencyInput from 'react-native-currency-input'
@@ -14,14 +14,14 @@ import { TopTabBuyOrSellParamList } from '../../../../routes/TopTab'
 
 type BuyProps = {
   route: RouteProp<TopTabBuyOrSellParamList, 'Buy'>
+  navigation: NavigationProp<TopTabBuyOrSellParamList, 'Buy'>
 }
 
-export default function Buy({ route }: BuyProps) {
-  const BALANCE = 10000
-
+export default function Buy({ route, navigation }: BuyProps) {
+  const BALANCE = 43123.12
   const ticker = 'AAPL'
 
-  console.log(route)
+  console.log('Buy route', route)
 
   // const { ticker } = route.params
 
@@ -160,7 +160,12 @@ export default function Buy({ route }: BuyProps) {
         </S.RecipeContainer>
 
         <S.ButtonWrapper>
-          <Button label="Comprar" disabled={state.isAboveLimit} />
+          <Button
+            label="Comprar"
+            disabled={state.isAboveLimit}
+            // @ts-ignore
+            handleClick={() => navigation.navigate('Home')}
+          />
         </S.ButtonWrapper>
       </S.Container>
     </TouchableWithoutFeedback>

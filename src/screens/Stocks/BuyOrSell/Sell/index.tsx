@@ -16,7 +16,7 @@ import { Button } from '../../../../components'
 // }
 
 export default function Sell() {
-  const BALANCE = 10000
+  const BALANCE = 43123.12
 
   const ticker = 'AAPL'
 
