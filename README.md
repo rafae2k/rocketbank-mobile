@@ -78,7 +78,7 @@ Rocket Bank was my second attempt at building a mobile application, my first was
 
 That where being moved to the next stage soon as i opened the Pull Request, and then moved to the next stage when the Pull Request was merged into main branch.
 
-- The standardization of the project was made with:
+- The standardization of the project was done with:
   - **_Commitlint_** to check the commit message following Angular's style.
   - **_lint-staged_** to ensure no lint or TypeScript errors are committed.
   - **_Prettier_** to format the code following the **_ESlint_** Standard.
@@ -104,11 +104,11 @@ That where being moved to the next stage soon as i opened the Pull Request, and 
 
 - **_Typescript types_** and **_Eslint_** rules and configuration
 
-- **_Styled-components_** was difficult to know that some styles didn't work on native that I was used on web development, like `gap` and different implementation of `flex`.
+- **_Styled-components:_** was difficult to know that some styles didn't work on native that I was used on web development, like `gap` and different implementation of `flex`.
 
 - Work with native components like, `FlatList` and `ScrollView`, `KeyboardAvoidingView`, as much the project was becoming more complex, and nesting components generated errors, like `ScrollView` inside a `ScrollView`.
 
-- **_Debugging_** was difficult to understand how to debug the app styles and state and setup flipper to work with expo.
+- **_Debugging:_** was difficult to understand how to debug the app styles and state and setup flipper to work with expo.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -116,7 +116,7 @@ That where being moved to the next stage soon as i opened the Pull Request, and 
 
 ## Getting Started
 
-Expo Snack - Test the app on your on web or on your phone.
+Expo Snack - Test the app on web or on your phone.
 
 [Click Here to run the app on Expo Snack](https://snack.expo.dev/@rafae2k/694e1f)
 
