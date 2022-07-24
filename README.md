@@ -80,8 +80,8 @@ That where being moved to the next stage soon as i opened the Pull Request, and 
 
 - The standardization of the project was done with:
   - **_Commitlint_** to check the commit message following Angular's style.
-  - **_lint-staged_** to ensure no lint or TypeScript errors are committed.
-  - **_Prettier_** to format the code following the **_ESlint_** Standard.
+  - **_lint-staged_** to ensure that no ESlint or TypeScript errors we're committed.
+  - **_Prettier_** to format the code following the **_ESlint_** config.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
