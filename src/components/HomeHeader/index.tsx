@@ -19,7 +19,7 @@ export default function HomeHeader() {
   const [isHide, setIsHide] = useState(true)
   const navigation = useNavigation()
 
-  const balanceFormatted = formatToCurrency(BALANCE, 'pt-BR', 'BRL')
+  const balanceFormatted = formatToCurrency(BALANCE, 'pt-BR', 'USD')
 
   return (
     <View style={styles.container}>
