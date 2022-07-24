@@ -1,23 +1,25 @@
 import { Feather } from '@expo/vector-icons'
-import React, { useState } from 'react'
-import {
-  TextInputProps,
-  View,
-  TextInput,
-  StyleSheet,
-  Text,
-  TouchableOpacity
-} from 'react-native'
+import { useState } from 'react'
+import { Control, Controller, FieldError } from 'react-hook-form'
+import { TextInputProps } from 'react-native'
 import theme from '../../styles/theme'
+import * as S from './styles'
 
 export type InputProps = TextInputProps & {
   icon: React.ComponentProps<typeof Feather>['name']
-  value?: string
+  value?: string | number
   label: string
   password?: boolean
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  control: Control<any>
+  name: string
+  error?: FieldError
 }
 
 export default function Input({
+  name,
+  control,
+  error,
   icon,
   value,
   label,
@@ -28,87 +30,66 @@ export default function Input({
   const [isFilled, setIsFilled] = useState(false)
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
 
-  function handleInputFocus() {
+  const handleInputFocus = () => {
     setIsFocused(true)
   }
 
-  function handleInputBlur() {
+  const handleInputBlur = () => {
     setIsFocused(false)
     setIsFilled(!!value)
   }
 
   return (
-    <>
-      <Text style={styles.label}>{label}</Text>
-      <View style={[styles.container, isFocused ? styles.focused : null]}>
-        <View style={styles.iconContainer}>
-          <Feather
-            name={icon}
-            size={24}
-            color={
-              isFocused || isFilled
-                ? theme.colors.primary.brand
-                : theme.colors.neutral.gray
-            }
-          />
-        </View>
+    <S.ControllerContainer>
+      <Controller
+        name={name}
+        control={control}
+        render={({ field: { onChange, value } }) => (
+          <S.Container>
+            <S.Label>{label}</S.Label>
+            <S.InputWrapper isFocused={isFocused} isError={error}>
+              <S.IconWrapper>
+                <Feather
+                  name={icon}
+                  size={24}
+                  color={
+                    isFocused || isFilled
+                      ? theme.colors.primary.brand
+                      : error
+                        ? theme.colors.semantic.error
+                        : theme.colors.neutral.gray
+                  }
+                />
+              </S.IconWrapper>
 
-        <TextInput
-          style={styles.input}
-          onFocus={handleInputFocus}
-          onBlur={handleInputBlur}
-          value={value}
-          secureTextEntry={!isPasswordVisible && password}
-          {...rest}
-        />
+              {/* @ts-ignore */}
+              <S.Input
+                style={{ flexDirection: 'row' }}
+                onChangeText={onChange}
+                onFocus={handleInputFocus}
+                onBlur={handleInputBlur}
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                value={value}
+                secureTextEntry={!isPasswordVisible && password}
+                {...rest}
+              />
 
-        {password && (
-          <TouchableOpacity
-            style={styles.iconContainer}
-            onPress={() => setIsPasswordVisible(!isPasswordVisible)}
-          >
-            <Feather
-              name={isPasswordVisible ? 'eye-off' : 'eye'}
-              size={24}
-              color={theme.colors.text.onBackground}
-            />
-          </TouchableOpacity>
+              {password && (
+                <S.HidePassword
+                  onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+                >
+                  <Feather
+                    name={isPasswordVisible ? 'eye-off' : 'eye'}
+                    size={24}
+                    color={theme.colors.neutral.black}
+                  />
+                </S.HidePassword>
+              )}
+            </S.InputWrapper>
+          </S.Container>
         )}
-      </View>
-    </>
+      />
+      {error && <S.Error>{error.message}</S.Error>}
+    </S.ControllerContainer>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: theme.colors.neutral.grayLight,
-    paddingHorizontal: 16,
-    borderRadius: 4,
-    height: 52
-  },
-  iconContainer: {
-    height: 24,
-    width: 24
-  },
-  input: {
-    flex: 1,
-    marginLeft: 16,
-    paddingVertical: 16,
-    fontFamily: theme.fontWeight.medium,
-    fontSize: 14
-  },
-  label: {
-    fontFamily: theme.fontWeight.medium,
-    fontSize: 16,
-    color: theme.colors.text.onBackground,
-    marginBottom: 8
-  },
-  focused: {
-    borderColor: theme.colors.primary.brand,
-    borderWidth: 2
-  }
-})

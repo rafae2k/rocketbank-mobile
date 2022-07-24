@@ -28,7 +28,8 @@ const Tabs = () => {
         unmountOnBlur: false,
         headerShown: false,
         tabBarShowLabel: false,
-        tabBarStyle: { ...styles.tabBar }
+        tabBarStyle: { ...styles.tabBar },
+        headerLeft: () => null
       }}
     >
       <Tab.Screen

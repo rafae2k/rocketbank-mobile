@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import * as LocalAuthentication from 'expo-local-authentication'
+import * as SecureStore from 'expo-secure-store'
 import {
   SafeAreaView,
   StyleSheet,
@@ -15,38 +17,53 @@ import {
 } from 'react-native'
 
 import theme from '../../styles/theme'
-import { Button, LoginForm } from '../../components'
+import { LoginFormData } from '../../types'
+import LoginForm from '../../components/Form/Login'
 
 export default function Login() {
-  const [isBiometricSupported, setIsBiometricSupported] = useState(false)
+  const [, setIsBiometricSupported] = useState(false)
+
   const navigation = useNavigation()
+
+  const save = async (key: string, value: string) => {
+    await SecureStore.setItemAsync(key, value)
+  }
+
+  const getUserInfo = async () => {
+    return await SecureStore.getItemAsync('email')
+  }
 
   useEffect(() => {
     void (async () => {
-      const compatible = await LocalAuthentication.hasHardwareAsync()
-      setIsBiometricSupported(compatible)
+      // await SecureStore.deleteItemAsync('email')
+      const isCompatible = await LocalAuthentication.hasHardwareAsync()
+      setIsBiometricSupported(isCompatible)
+      const user = await getUserInfo()
+      if (user) {
+        try {
+          const result = await LocalAuthentication.authenticateAsync()
+          if (result.success) {
+            // TODO need to type useNavigation()
+            // @ts-ignore
+            navigation.navigate('HomeTabs')
+          }
+        } catch (e) {
+          Alert.alert('Authentication failed')
+        }
+      }
     })()
   })
 
-  const handleAuthenticate = () => {
-    void (async () => {
-      try {
-        const result = await LocalAuthentication.authenticateAsync()
-        if (result.success) {
-          // TODO need to type useNavigation()
-          // @ts-ignore
-          navigation.navigate('HomeTabs')
-        }
-      } catch (e) {
-        Alert.alert('Authentication failed')
-      }
-    })()
+  const handleAuthenticate = async (data: LoginFormData) => {
+    await save('email', data.email)
+    // @ts-ignore
+    navigation.navigate('HomeTabs')
   }
 
   return (
     <SafeAreaView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <KeyboardAvoidingView behavior="padding" enabled>
+        <KeyboardAvoidingView behavior="position" enabled>
           <View style={styles.container}>
             <Image
               source={
@@ -56,25 +73,11 @@ export default function Login() {
               resizeMode="contain"
             />
             <View>
-              <Text style={styles.header}>Login in to Rocket Bank</Text>
-              <Text style={styles.subTitle}>Welcome</Text>
+              <Text style={styles.header}>Faça login Rocket Bank</Text>
+              <Text style={styles.subTitle}>Bem vindo</Text>
             </View>
 
-            <LoginForm />
-
-            <View style={{ height: 48 }}>
-              <Button
-                label={isBiometricSupported ? 'Login with Face ID' : 'Login'}
-                handleClick={handleAuthenticate}
-                iconPosition="right"
-                icon={{
-                  type: 'feather',
-                  iconName: 'arrow-right',
-                  size: 24,
-                  color: theme.colors.neutral.white
-                }}
-              />
-            </View>
+            <LoginForm onSubmit={handleAuthenticate} />
           </View>
         </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
@@ -84,9 +87,8 @@ export default function Login() {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 16,
-    height: '100%',
-    justifyContent: 'center'
+    marginTop: 100,
+    paddingHorizontal: 16
   },
   logo: {
     width: 100,

@@ -13,10 +13,14 @@ const Stack = createStackNavigator<RootRoutesStackParamList>()
 export default function Routes() {
   return (
     <Stack.Navigator
-      screenOptions={{ headerShown: false, gestureEnabled: false }}
+      screenOptions={{
+        headerShown: false,
+        gestureEnabled: false,
+        headerLeft: () => null
+      }}
     >
-      <Stack.Screen name="HomeTabs" component={Tabs} />
       <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="HomeTabs" component={Tabs} />
     </Stack.Navigator>
   )
 }

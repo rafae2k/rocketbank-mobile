@@ -3,7 +3,6 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![MIT License][license-shield]][license-url]
-[ADD CI BADGE]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -41,6 +40,7 @@
       <a href="#How-it-was-made">How it was made</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
+        <li><a href="#problems">Problems</a></li>
       </ul>
     </li>
     <li>
@@ -61,6 +61,8 @@
 <!-- ABOUT THE PROJECT -->
 
 ## How it was made
+
+Rocket Bank was my second attempt at building a mobile application, my first was [Uber Clone](https://github.com/rafae2k/uber-clone).
 
 - Used github projects to build an automated Kanban board, by creating issues/TODO's
   - requirements
@@ -91,6 +93,22 @@ That where being moved to the next stage soon as i opened the Pull Request, and 
 - 🧩 [Expo](https://www.expo.dev)
 - ⛵️ [React Navigation](https://reactnavigation.org/)
 - 🦙 [Alpaca Market Data](https://https://alpaca.markets//)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- PROBLEMS FACED -->
+
+### Problems
+
+- Learn and understand **_react navigation_** lib and how to work with nested screens and routes and correctly type it.
+
+- **_Typescript types_** and **_Eslint_** rules and configuration
+
+- **_Styled-components_** was difficult to know that some styles didn't work on native that I was used on web development, like `gap` and different implementation of `flex`.
+
+- Work with native components like, `FlatList` and `ScrollView`, `KeyboardAvoidingView`, as much the project was becoming more complex, and nesting components generated errors, like `ScrollView` inside a `ScrollView`.
+
+- **_Debugging_** was difficult to understand how to debug the app styles and state and setup flipper to work with expo.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -171,8 +189,6 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Contact
 
-- Twitter [@hm_rafo](https://twitter.com/hm_rafo)
-  <br>
 - Email <a href="mailto:hello@rafo.work">hello@rafo.work</a>
 
 - Linkedin [Rafael Feitoza](https://www.linkedin.com/in/eurafo/)
