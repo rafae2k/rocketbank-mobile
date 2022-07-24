@@ -71,6 +71,8 @@ Rocket Bank was my second attempt at building a mobile application, my first was
   - screens
   - logic
   - issues/bugs
+  
+  [Link to the Kanban Project Board](https://github.com/users/rafae2k/projects/2)
 
 <p float='center'>
   <img src="docs/assets/kanban.png" width="600" alt="Github Kanban Board" />
