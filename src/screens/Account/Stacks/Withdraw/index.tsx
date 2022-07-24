@@ -11,6 +11,7 @@ import * as S from './styles'
 import { Button } from '../../../../components'
 import { StatusBar } from 'expo-status-bar'
 import { BalanceInfo } from '../../../../components/BalanceInfo'
+import { formatToCurrency } from '../../../../utils/currencyFormatter'
 
 const ACCOUNTS = [
   'Banco XP - CC 09123-4',
@@ -18,6 +19,8 @@ const ACCOUNTS = [
   'Inter - CC 09123-4',
   'Santander - CC 09123-4'
 ]
+
+const BALANCE = 43123.12
 
 export default function Withdraw() {
   const [selectedAccount, setSelectedAccount] = useState('')
@@ -42,9 +45,9 @@ export default function Withdraw() {
             <S.Heading>Qual valor deseja sacar?</S.Heading>
             <S.InputWrapper>
               <CurrencyInput
-                placeholder="R$ 100"
+                placeholder="US$ 100"
                 keyboardType="numeric"
-                prefix="R$"
+                prefix="USD"
                 delimiter="."
                 separator=","
                 precision={2}
@@ -61,7 +64,7 @@ export default function Withdraw() {
 
             <BalanceInfo
               title="Saldo disponível"
-              balanceFormatted="R$ 200.012,00"
+              balanceFormatted={formatToCurrency(BALANCE)}
             />
           </S.AmountWrapper>
 
