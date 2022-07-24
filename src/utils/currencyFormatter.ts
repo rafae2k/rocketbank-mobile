@@ -1,6 +1,6 @@
 export const formatToCurrency = (
   value: number,
-  country: string,
+  country = 'pt-BR',
   currency = 'USD'
 ) => {
   return new Intl.NumberFormat(country, {
