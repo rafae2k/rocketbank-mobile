@@ -202,15 +202,6 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-<!-- CONTACT -->
-
-## Contact
-
-- Email <a href="mailto:hello@rafo.work">hello@rafo.work</a>
-
-- Linkedin [Rafael Feitoza](https://www.linkedin.com/in/eurafo/)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
